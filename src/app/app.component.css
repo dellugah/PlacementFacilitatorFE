@@ -17,7 +17,8 @@
   grid-gap: 0;
   flex-direction: column;
   position: relative;
-  min-height: 3em;
+  min-height: 8em;
+  max-height: 10em;
 }
 
 .contentArea{
