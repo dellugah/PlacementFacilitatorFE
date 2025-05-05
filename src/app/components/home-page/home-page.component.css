@@ -1,0 +1,22 @@
+.loginContainer{
+  margin-top: -5em;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-gap: .5em;
+  scale: 1.5;
+}
+
+.loginLabel{
+  font-size: .7em;
+}
+
+.loginCredentials{
+  height: 2em;
+  border-radius: 1em;
+  border: 1px none;
+  padding-left: 1em;
+  padding-right: 1em;
+  outline: none;
+  background-color: #f6f9ff;
+}

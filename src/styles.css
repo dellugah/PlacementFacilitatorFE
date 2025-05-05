@@ -9,3 +9,26 @@ body{
   align-items: center;
   justify-content: center;
 }
+
+button{
+  padding: .5em;
+  margin: .5em;
+}
+
+.redButton{
+  background-color: red;
+  border: none;
+  border-radius: 2em;
+  width: 70%;
+  justify-self: center;
+  color: white;
+}
+
+.blackButton{
+  background-color: #000000;
+  border: none;
+  border-radius: 2em;
+  width: 70%;
+  justify-self: center;
+  color: white;
+}

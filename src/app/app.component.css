@@ -20,10 +20,9 @@
   min-height: 3em;
 }
 
-router-outlet{
-  min-height: 30em;
+.contentArea{
+  display: grid;
 }
-
 .footerBar{
   opacity: 5%;
 }

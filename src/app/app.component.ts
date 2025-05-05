@@ -9,5 +9,4 @@ import {NgOptimizedImage} from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'PlacementFacilitatorFE';
 }
