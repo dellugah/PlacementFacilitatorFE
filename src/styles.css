@@ -10,6 +10,10 @@ body{
   justify-content: center;
 }
 
+button{
+  cursor: pointer;
+}
+
 .redButton{
   margin-right: .5em;
   margin-top: 1em;

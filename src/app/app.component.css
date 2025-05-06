@@ -1,7 +1,5 @@
-.main_Container{
+.mainContainer{
   padding: 1em;
-  height: 90%;
-  width: 80%;
   background-color: #ffffff;
   display: grid;
   border-radius: .5em;
@@ -10,6 +8,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.mainContainer-size{
+  height: 90%;
+  width: 80%;
 }
 
 .navBar{
@@ -90,11 +93,10 @@
   border: none;
   font-size: 1.2em;
   transition: all .1s ease-in-out;
+  cursor: pointer;
 }
 .navButton:hover{
   scale: 1.1;
-}
-.navButton:active{
   color: red;
 }
 

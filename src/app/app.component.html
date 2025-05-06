@@ -1,5 +1,5 @@
-<div class="main_Container">
-  <div class="navBar">
+<div [ngClass]="mainClass">
+  <div class="navBar" *ngIf="router.url !== '/'">
     <div class="profileArea">
       <div class="profileInfoContainer">
         <div class="userInfo">
@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="profileOptions">
-        <button class="logOff navButton">
+        <button class="logOff navButton" routerLink="/">
           Log Off
 <!--          <img id="logOutIcon" ngSrc="/logout.png" alt="" width="512" height="512">-->
         </button>
@@ -27,5 +27,5 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div class="footerBar"></div>
+  <div class="footerBar" *ngIf="router.url === '/profile'"></div>
 </div>
