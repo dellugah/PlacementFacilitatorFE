@@ -1,17 +1,28 @@
-<div class="loginContainer">
+<form [formGroup]="loginForm" class="loginContainer">
   <div class="inputContainer">
     <label class="loginLabel" for="username">Username</label>
-    <input class="loginCredentials" type="text" name="username">
+    <input class="signInCredentials"
+           id="username"
+           type="text"
+           formControlName="username"
+           autocomplete="username"
+           required>
   </div>
 
   <div class="inputContainer">
     <label class="loginLabel" for="password">Password</label>
-    <input class="loginCredentials" type="password" name="password">
-  </div>
+    <input class="signInCredentials"
+           id="password"
+           type="password"
+           formControlName="password"
+           autocomplete="current-password"
+           required
+           minlength="8"
+           aria-describedby="password-constraints">
 
+  </div>
   <div class="buttonContainer">
-    <button class="redButton" routerLink="/employer-profile">Login</button>
-    <button class="blackButton">Register</button>
+    <button class="redButton" (click)="login()">Login</button>
+    <button class="blackButton" routerLink="register">Register</button>
   </div>
-
-</div>
+</form>

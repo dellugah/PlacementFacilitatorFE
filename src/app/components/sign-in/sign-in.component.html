@@ -1,0 +1,84 @@
+<form [formGroup]="loginForm" class="signInContainer">
+  <h1>Sign In</h1>
+    <div class="inputContainer">
+      <label class="loginLabel" for="accountType">Account Type</label>
+      <select class="signInCredentials"
+              id="accountType"
+              formControlName="accountType"
+              required>
+        <option value="">Select account type</option>
+        <option value="STUDENT">Student</option>
+        <option value="EMPLOYER">Employer</option>
+      </select>
+    </div>
+
+  <div *ngIf="loginForm.get('accountType')?.value !== ''">
+    <div class="inputContainer" *ngIf="loginForm.get('accountType')?.value === 'EMPLOYER'">
+      <div class="inputContainer">
+        <label class="loginLabel" for="companyName">Company Name</label>
+        <input class="signInCredentials"
+               id="companyName"
+               type="text"
+               formControlName="companyName"
+               maxlength="15">
+      </div>
+    </div>
+
+    <div class="inputContainer" *ngIf="loginForm.get('accountType')?.value === 'STUDENT'">
+      <div class="inputContainer">
+        <label class="loginLabel" for="firstName">First Name</label>
+        <input class="signInCredentials"
+               id="firstName"
+               type="text"
+               formControlName="firstName"
+               maxlength="10">
+      </div>
+
+      <div class="inputContainer">
+        <label class="loginLabel" for="lastName">Last Name</label>
+        <input class="signInCredentials"
+               id="lastName"
+               type="text"
+               formControlName="lastName"
+               maxlength="10">
+      </div>
+    </div>
+
+    <div class="inputContainer">
+      <label class="loginLabel" for="username">Username</label>
+      <input class="signInCredentials"
+             id="username"
+             type="text"
+             formControlName="username"
+             autocomplete="username"
+             required
+             minlength="8">
+    </div>
+
+    <div class="inputContainer">
+      <label class="loginLabel" for="password">Password</label>
+      <input class="signInCredentials"
+             id="password"
+             type="password"
+             formControlName="password"
+             autocomplete="new-password"
+             required
+             minlength="8">
+    </div>
+
+    <div class="inputContainer">
+      <label class="loginLabel" for="email">Email</label>
+      <input class="signInCredentials"
+             id="email"
+             type="email"
+             formControlName="email"
+             autocomplete="email"
+             required>
+    </div>
+
+    <div class="buttonContainer">
+      <button class="redButton" (click)="register()">Register</button>
+    </div>
+</div>
+
+</form>

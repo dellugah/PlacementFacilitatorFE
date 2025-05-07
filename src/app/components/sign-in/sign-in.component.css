@@ -1,4 +1,4 @@
-.loginContainer{
+.signInContainer{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -6,11 +6,10 @@
   justify-content: center;
   grid-gap: .5em;
 }
-
-.loginLabel{
-  font-size: 1em;
+.inputContainer{
+  display: flex;
+  flex-direction: column;
 }
-
 .signInCredentials{
   height: 3em;
   width: 15em;
@@ -22,15 +21,9 @@
   background-color: #f6f9ff;
 }
 
-.inputContainer{
-  display: flex;
-  flex-direction: column;
-}
-
 .buttonContainer{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
-

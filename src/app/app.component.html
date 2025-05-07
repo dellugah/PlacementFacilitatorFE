@@ -1,17 +1,15 @@
 <div [ngClass]="mainClass">
-  <div class="navBar" *ngIf="router.url !== '/'">
+  <div class="navBar" *ngIf="logedIn"
+  >
     <div class="profileArea">
       <div class="profileInfoContainer">
         <div class="userInfo">
           <img id="profileImg" ngSrc="/profile.png" alt="" height="64" width="64">
-          <h2 id="profileName">Profile Name</h2>
+          <h2 id="profileName">{{name}}</h2>
         </div>
       </div>
       <div class="profileOptions">
-        <button class="logOff navButton" routerLink="/">
-          Log Off
-<!--          <img id="logOutIcon" ngSrc="/logout.png" alt="" width="512" height="512">-->
-        </button>
+        <button class="logOff navButton" routerLink="/">Log Off</button>
       </div>
     </div>
     <div class="navOptions">
@@ -26,6 +24,5 @@
   <div class="contentArea">
     <router-outlet></router-outlet>
   </div>
-
-  <div class="footerBar" *ngIf="router.url === '/profile'"></div>
+  <div class="footerBar" *ngIf="router.url === '/profile' || '/register'"></div>
 </div>
