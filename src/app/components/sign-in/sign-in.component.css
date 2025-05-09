@@ -7,6 +7,8 @@
   grid-gap: .5em;
 }
 .inputContainer{
+  margin-top: .5em;
+  margin-bottom: .5em;
   display: flex;
   flex-direction: column;
 }

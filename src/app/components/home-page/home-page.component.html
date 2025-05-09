@@ -1,4 +1,5 @@
 <form [formGroup]="loginForm" class="loginContainer">
+  <h1>Log <span class="red">In</span></h1>
   <div class="inputContainer">
     <label class="loginLabel" for="username">Username</label>
     <input class="signInCredentials"
@@ -22,7 +23,7 @@
 
   </div>
   <div class="buttonContainer">
-    <button class="redButton" (click)="login()">Login</button>
-    <button class="blackButton" routerLink="register">Register</button>
+    <button class="redButton" (click)="login()">Log in</button>
+    <button class="blackButton" routerLink="register">Sign In</button>
   </div>
 </form>

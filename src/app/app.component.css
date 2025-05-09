@@ -1,8 +1,7 @@
 .mainContainer{
-  padding: 1em;
+  padding: 2em;
   background-color: #ffffff;
-  display: grid;
-  border-radius: .5em;
+  border-radius: 1em;
   box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
   position: absolute;
   top: 50%;
@@ -13,97 +12,4 @@
 .mainContainer-size{
   height: 90%;
   width: 80%;
-}
-
-.navBar{
-  display: grid;
-  grid-gap: 0;
-  flex-direction: column;
-  position: relative;
-  min-height: 8em;
-  max-height: 10em;
-}
-
-.contentArea{
-  display: grid;
-}
-.footerBar{
-  opacity: 5%;
-}
-
-.profileArea{
-  display: flex;
-  flex-direction: row;
-  grid-gap: 0;
-  position: relative;
-  min-height: 3em;
-}
-
-.navOptions{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  border-color: #f1f1f1;
-  position: relative;
-  height: 100%;
-  width: 100%;
-  min-height: 1em;
-  max-height: 3em;
-}
-
-.profileInfoContainer{
-  position: relative;
-  min-width: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-
-}
-.profileOptions{
-  position: relative;
-  min-width: 50%;
-}
-
-.logOff{
-  position: absolute;
-  height: 30%;
-  right: 0;
-  top: 50%;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-}
-
-.userInfo{
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.navButton{
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  font-size: 1.2em;
-  transition: all .1s ease-in-out;
-  cursor: pointer;
-}
-.navButton:hover{
-  scale: 1.1;
-  color: red;
-}
-
-#profileName{
-  margin-left: 1em;
-}
-
-#profileName{
-
 }

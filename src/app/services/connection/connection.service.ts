@@ -1,59 +1,79 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {firstValueFrom} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
+interface TokenData {
+  token: string;
+  homePage: string;
+  expiresIn: number;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionService {
-  get token(): { token: string; homePage: string; expiresIn: number } {
-    return this._token;
-  }
-
-  set token(value: { token: string; homePage: string; expiresIn: number }) {
-    this._token = value;
-  }
-
-  constructor(private http: HttpClient) { }
-
-  private _token : { token: string; homePage: string; expiresIn: number } = {
-    token: ''
-    ,
+  private tokenSubject = new BehaviorSubject<TokenData>({
+    token: '',
+    homePage: '',
     expiresIn: 0
-    ,
-    homePage: ''
-  };
+  });
 
-  private postHeaders = new HttpHeaders()
-    .set('Authorization', this._token.token)
-    .set('Content-Type', 'application/json')
-    .set('X-Requested-With', 'XMLHttpRequest');
+  token$ = this.tokenSubject.asObservable();
+  private baseUrl = 'http://localhost:8080/api/';
 
+  constructor(private http: HttpClient) {}
 
-  public async postConnection(data: any, endpoint : string) {
+  get token(): TokenData {
+    return this.tokenSubject.getValue();
+  }
+
+  set token(value: TokenData) {
+    this.tokenSubject.next(value);
+  }
+
+  private get headers(): HttpHeaders {
+    const tokenValue = this.token.token ? `Bearer ${this.token.token}` : '';
+    console.log(tokenValue);
+    return new HttpHeaders()
+      .set('Authorization', tokenValue)
+      .set('Content-Type', 'application/json')
+  }
+
+  public async postConnection(data: any, endpoint: string) {
     try {
       return await firstValueFrom(
-        this.http.post('http://localhost:8080/api/' + endpoint, data, {
-          headers: this.postHeaders
+        this.http.post(`${this.baseUrl}${endpoint}`, data, {
+          headers: this.headers
         })
       );
     } catch (error) {
-      // Handle error appropriately
       console.error('Error:', error);
       return {};
     }
   }
 
-  public async getConnection(data : any, endpoint : string) {
+  public async getConnection(data: any, endpoint: string) {
     try {
+      console.log('Authorization header:', this.headers.get('Authorization'));
       return await firstValueFrom(
-        this.http.post('http://localhost:8080/api/' + endpoint, data, {
-          headers: this.postHeaders
+        this.http.post(`${this.baseUrl}${endpoint}`, data, {
+          headers: this.headers
         })
       );
     } catch (error) {
-      // Handle error appropriately
+      console.error('Error:', error);
+      return {};
+    }
+  }
+
+  public async getLogIn() {
+    try {
+      return await firstValueFrom(
+        this.http.get(`${this.baseUrl}users/me`, {
+          headers: this.headers
+        })
+      );
+    } catch (error) {
       console.error('Error:', error);
       return {};
     }

@@ -11,6 +11,7 @@ import {ConnectionService} from '../../services/connection/connection.service';
     RouterLink
   ],
   templateUrl: './home-page.component.html',
+  standalone: true,
   styleUrl: './home-page.component.css'
 })
 export class HomePageComponent {

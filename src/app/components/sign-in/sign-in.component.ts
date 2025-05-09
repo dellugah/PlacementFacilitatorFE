@@ -2,16 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {ConnectionService} from '../../services/connection/connection.service';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
   imports: [
     ReactiveFormsModule,
     NgIf,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './sign-in.component.html',
+  standalone: true,
   styleUrl: './sign-in.component.css'
 })
 export class SignInComponent{

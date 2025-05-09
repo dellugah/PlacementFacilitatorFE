@@ -1,5 +1,5 @@
 <form [formGroup]="loginForm" class="signInContainer">
-  <h1>Sign In</h1>
+  <h1>Sign <span class="red">In</span></h1>
     <div class="inputContainer">
       <label class="loginLabel" for="accountType">Account Type</label>
       <select class="signInCredentials"
@@ -80,5 +80,6 @@
       <button class="redButton" (click)="register()">Register</button>
     </div>
 </div>
+  <button class="blackButton" routerLink="/">Back</button>
 
 </form>

@@ -12,10 +12,11 @@ body{
 
 button{
   cursor: pointer;
+  margin-right: .5em;
+  margin-left: .5em;
 }
 
 .redButton{
-  margin-right: .5em;
   margin-top: 1em;
   font-size: 1em;
   width: 7em;
@@ -28,7 +29,6 @@ button{
 }
 
 .blackButton{
-  margin-left: .5em;
   font-size: 1em;
   margin-top: 1em;
   width: 7em;
@@ -38,4 +38,13 @@ button{
   border-radius: 2em;
   justify-self: center;
   color: white;
+}
+
+.red{
+  color: red;
+}
+
+router-outlet{
+  max-height: 0;
+  max-width: 0;
 }
