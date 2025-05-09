@@ -26,7 +26,7 @@
 
 .placement-name{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #cfcfcf;
@@ -37,7 +37,27 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1em;
 }
+
+.option-button{
+  border-radius: .5em;
+  padding: .5em;
+  background-color: #f1f8ff;
+  border: 1px solid #cfcfcf;
+}
+
+.option-button:hover{
+  background-color: #9ad2ff;
+  border-color: #009dff;
+}
+
+.delete:hover{
+  color: white;
+  background-color: #ff5757;
+  border-color: red;
+}
+
 
 .addImage{
   opacity: 80%;
