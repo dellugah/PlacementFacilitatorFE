@@ -1,0 +1,21 @@
+<div class="navBar">
+  <div class="profileArea">
+    <div class="profileInfoContainer">
+      <div class="userInfo">
+        <img id="profileImg" ngSrc="/profile.png" alt="" height="64" width="64">
+        <h2 id="profileName">{{profile$.value.firstName}} {{profile$.value.lastName}}</h2>
+      </div>
+    </div>
+    <div class="profileOptions">
+      <button class="logOff navButton" routerLink="/">Log Off</button>
+    </div>
+  </div>
+  <div class="navOptions">
+    <div class="spacing"></div>
+    <button class="home navButton">Home</button>
+    <button class="editProfile navButton">Edit</button>
+    <button class="help navButton">Help</button>
+    <div class="spacing"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>
