@@ -29,8 +29,13 @@ export class HomePageComponent {
         username: this.loginForm.get('username')?.value,
         password: this.loginForm.get('password')?.value
       })
-      this.connection.token = await this.connection.postConnection(data, 'auth/login') as { token: string; homePage: string; expiresIn: number };
-      console.log(this.connection.token);
-      await this.router.navigate([this.connection.token.homePage]);
+      const session = await this.connection.postConnection(data, 'auth/login') as { token: string; homePage: string; expiresIn: number }
+      console.log(session);
+      this.connection.setToken(session.token);
+      this.connection.setExpiresIn(session.expiresIn);
+      this.connection.setHomePage(session.homePage);
+      console.log(this.connection.getHomePage());
+
+      await this.router.navigate([this.connection.getHomePage()]);
   }
 }

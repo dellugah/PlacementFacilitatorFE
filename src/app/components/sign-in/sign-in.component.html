@@ -75,11 +75,11 @@
              autocomplete="email"
              required>
     </div>
-
-    <div class="buttonContainer">
-      <button class="redButton" (click)="register()">Register</button>
-    </div>
 </div>
-  <button class="blackButton" routerLink="/">Back</button>
+  <div class="buttonContainer">
+    <button class="redButton" (click)="register()" *ngIf="loginForm.get('accountType')?.value !== ''">Register</button>
+    <button class="blackButton" routerLink="/" >Back</button>
+  </div>
+
 
 </form>

@@ -4,14 +4,15 @@ import {ProfileServiceService} from '../../../services/profileServices/profile-s
 import {BehaviorSubject} from 'rxjs';
 import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {NgIf, NgOptimizedImage} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 
 
 @Component({
   selector: 'app-employer-profile',
   imports: [
     NgOptimizedImage,
-    RouterLink
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './employer-profile.component.html',
   standalone: true,
@@ -26,6 +27,7 @@ export class EmployerProfileComponent implements OnInit {
 
     async ngOnInit(){
     const loginData = await this.connection.getLogIn();
+    console.log(loginData);
     this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO);
     this.profile$ = this.profile.profile;
   }

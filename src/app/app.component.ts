@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import { Router } from '@angular/router';
-import {NgClass, NgIf, NgOptimizedImage} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {ProfileServiceService} from './services/profileServices/profile-service.service';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NgOptimizedImage, NgClass, NgIf, RouterLink],
+  imports: [RouterOutlet, NgClass, NgIf],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrl: './app.component.css'

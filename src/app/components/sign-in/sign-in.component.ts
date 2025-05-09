@@ -42,10 +42,12 @@ export class SignInComponent{
       email: this.loginForm.get('email')?.value,
       accountType: this.loginForm.get('accountType')?.value
     })
+    const session = await this.connection.postConnection(data, 'auth/signup') as { token: string; homePage: string; expiresIn: number };
+    this.connection.setToken(session.token);
+    this.connection.setExpiresIn(session.expiresIn);
+    this.connection.setHomePage(session.homePage);
 
-    this.connection.token = await this.connection.postConnection(data, 'auth/signup') as { token: string; homePage: string; expiresIn: number };
-    console.log(this.connection.token);
-    await this.router.navigate([this.connection.token.homePage]);
+    await this.router.navigate([this.connection.getHomePage]);
   }
 
 }
