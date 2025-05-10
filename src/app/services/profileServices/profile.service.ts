@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import { AccountDTO, ProfileDTO, PlacementDTO, AccountType, TechnicalSkill } from '../../DTOs/ProfileDTO';
+import { ProfileDTO, PlacementDTO, AccountType, TechnicalSkill } from '../../DTOs/ProfileDTO';
 
 
 @Injectable({
@@ -49,12 +49,11 @@ export class ProfileService {
     this._placement = value;
   }
 
-  getProfileValue(){
-    return this._profile$;
+  getPlacements(){
+    return this.profile.value.placements;
   }
 
   private _profile = new BehaviorSubject<ProfileDTO>(new ProfileDTO());
-  private _profile$ = this._profile;
   private _placement = new BehaviorSubject<PlacementDTO>(new PlacementDTO());
   private _accountType = new BehaviorSubject<AccountType | null>(null);
   private _technicalSkill = new BehaviorSubject<TechnicalSkill | null>(null);

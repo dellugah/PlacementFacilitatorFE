@@ -70,21 +70,11 @@ export class ProfileDTO {
 export class PlacementDTO {
   constructor(
     public placementId?: number,
-    public positionName: string = '',
+    public positionName?: string,
     public positionDescription?: string,
     public requiredSkills: TechnicalSkill[] = [],
     public positionsAvailable: number = 0,
     public visible: boolean = false,
     public potentialCandidates: ProfileDTO[] = []
-  ) {}
-}
-
-export class AccountDTO {
-  constructor(
-    public accountId?: number,
-    public username: string = '',
-    public password: string = '',
-    public accountType: AccountType = AccountType.STUDENT,
-    public profile?: ProfileDTO
   ) {}
 }

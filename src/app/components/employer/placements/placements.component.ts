@@ -1,23 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {NgOptimizedImage} from '@angular/common';
+import {NgForOf, NgOptimizedImage} from '@angular/common';
 import {ProfileService} from '../../../services/profileServices/profile.service';
 import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 
 @Component({
   selector: 'app-placements',
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgForOf
   ],
   templateUrl: './placements.component.html',
   standalone: true,
   styleUrl: './placements.component.css'
 })
-export class PlacementsComponent implements OnInit{
+export class PlacementsComponent implements OnInit {
 
-  constructor(private profile : ProfileService) { }
+  constructor(protected profile : ProfileService) { }
 
   ngOnInit(){
-    // console.log(this.profile.profile$);
+
   }
 
 }
