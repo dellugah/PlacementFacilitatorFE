@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {ConnectionService} from '../../../services/connection/connection.service';
-import {ProfileServiceService} from '../../../services/profileServices/profile-service.service';
+import {ProfileService} from '../../../services/profileServices/profile.service';
 import {NgOptimizedImage} from '@angular/common';
 import {RouterLink, RouterOutlet} from '@angular/router';
 
@@ -22,7 +22,7 @@ export class StudentProfileComponent implements OnInit{
   profile$: BehaviorSubject<ProfileDTO> = new BehaviorSubject<ProfileDTO>(new ProfileDTO());
 
   constructor(private connection : ConnectionService,
-              protected profile : ProfileServiceService) { }
+              protected profile : ProfileService) { }
 
   async ngOnInit(){
     const loginData = await this.connection.getLogIn();

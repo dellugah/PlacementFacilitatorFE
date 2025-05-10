@@ -3,9 +3,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 0;
+  /*align-items: flex-start;  !* Changed from center to flex-start *!*/
+  margin-top: 2em;
+  height: 70vh;
 }
 .placement{
   display: grid;

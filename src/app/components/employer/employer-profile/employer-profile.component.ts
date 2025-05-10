@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ConnectionService} from '../../../services/connection/connection.service';
-import {ProfileServiceService} from '../../../services/profileServices/profile-service.service';
+import {ProfileService} from '../../../services/profileServices/profile.service';
 import {BehaviorSubject} from 'rxjs';
 import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {NgIf, NgOptimizedImage} from '@angular/common';
@@ -23,12 +23,12 @@ export class EmployerProfileComponent implements OnInit {
   profile$!: BehaviorSubject<ProfileDTO>;
 
   constructor(private connection : ConnectionService,
-              protected profile : ProfileServiceService) { }
+              protected profile : ProfileService) { }
 
     async ngOnInit(){
     const loginData = await this.connection.getLogIn();
     console.log(loginData);
-    this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO);
+    this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO); 
     this.profile$ = this.profile.profile;
   }
 

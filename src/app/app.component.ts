@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import { Router } from '@angular/router';
 import {NgClass, NgIf} from '@angular/common';
-import {ProfileServiceService} from './services/profileServices/profile-service.service';
+import {ProfileService} from './services/profileServices/profile.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
 
 
   constructor(protected router : Router,
-              private profile : ProfileServiceService) {}
+              private profile : ProfileService) {}
 
   ngOnInit(){
     this.router.events.subscribe((event) => {

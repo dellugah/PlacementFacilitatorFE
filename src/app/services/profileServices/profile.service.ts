@@ -8,7 +8,16 @@ import { AccountDTO, ProfileDTO, PlacementDTO, AccountType, TechnicalSkill } fro
 })
 
 
-export class ProfileServiceService {
+export class ProfileService {
+
+  setProfile(profile: any) {
+    this._profile.next(profile);
+  }
+
+  getProfileSubject() {
+    return this._profile;
+  }
+
   get technicalSkill(): BehaviorSubject<TechnicalSkill | null> {
     return this._technicalSkill;
   }
@@ -40,7 +49,12 @@ export class ProfileServiceService {
     this._placement = value;
   }
 
+  getProfileValue(){
+    return this._profile$;
+  }
+
   private _profile = new BehaviorSubject<ProfileDTO>(new ProfileDTO());
+  private _profile$ = this._profile;
   private _placement = new BehaviorSubject<PlacementDTO>(new PlacementDTO());
   private _accountType = new BehaviorSubject<AccountType | null>(null);
   private _technicalSkill = new BehaviorSubject<TechnicalSkill | null>(null);

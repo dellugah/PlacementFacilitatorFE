@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgOptimizedImage} from '@angular/common';
+import {ProfileService} from '../../../services/profileServices/profile.service';
+import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 
 @Component({
   selector: 'app-placements',
@@ -10,9 +12,12 @@ import {NgOptimizedImage} from '@angular/common';
   standalone: true,
   styleUrl: './placements.component.css'
 })
-export class PlacementsComponent {
+export class PlacementsComponent implements OnInit{
 
-}
+  constructor(private profile : ProfileService) { }
 
-export class placements {
+  ngOnInit(){
+    // console.log(this.profile.profile$);
+  }
+
 }
