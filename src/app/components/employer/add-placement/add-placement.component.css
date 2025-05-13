@@ -4,7 +4,6 @@
   justify-content: center;
   align-content: center;
   align-items: center;  /* Changed from center to flex-start */
-  margin-top: 2em;
   height: 70vh;
   scroll-behavior: smooth;
 }

@@ -43,7 +43,8 @@ export class ConnectionService {
     return value ? Number(value) : null;
   }
 
-  private baseUrl = 'http://localhost:8080/api/';
+  // private baseUrl = 'http://localhost:8080/api/';
+  private baseUrl =  'https://placementfacilitator-production.up.railway.app/api/'
 
   constructor(private http: HttpClient) {}
 

@@ -20,8 +20,8 @@ import {NgClass, NgForOf} from '@angular/common';
 export class AddPlacementComponent implements OnInit {
 
   formGroup = new FormGroup({
-    positionName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
-    positionBio: new FormControl(),
+    positionName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+    positionDescription: new FormControl(),
     positionsAvailable: new FormControl('', [Validators.required, Validators.min(1), Validators.max(100)]),
     requiredSkills: new FormControl<string[]>([])
   });
@@ -41,7 +41,6 @@ export class AddPlacementComponent implements OnInit {
       console.log('invalid');
       return;
     }else{
-
       this.skillClass.forEach(skill => {
         if(skill.class === "greyBubbles bubbleSelected"){
           const requiredSkills = this.formGroup.get('requiredSkills');
@@ -54,7 +53,7 @@ export class AddPlacementComponent implements OnInit {
       const data = JSON.stringify({
         placementId: null,
         positionName: this.formGroup.get('positionName')?.value,
-        positionBio: this.formGroup.get('positionBio')?.value,
+        positionDescription: this.formGroup.get('positionDescription')?.value,
         positionsAvailable: this.formGroup.get('positionsAvailable')?.value,
         requiredSkills: this.formGroup.get('requiredSkills')?.value,
         visible: true
