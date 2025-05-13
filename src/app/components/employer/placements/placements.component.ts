@@ -46,5 +46,11 @@ export class PlacementsComponent implements OnInit {
     });
   }
 
+  async matchingSystem(placement: PlacementDTO){
+    await this.router.navigate(['employer/matching'], {
+      queryParams: { data: JSON.stringify(placement) }
+    });
+  }
+
 
 }

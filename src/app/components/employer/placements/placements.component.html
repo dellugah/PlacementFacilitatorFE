@@ -4,7 +4,7 @@
       <h2>{{ placement?.positionName }}</h2>
     </div>
     <div class="options">
-      <button class="option-button swipe">Matching</button>
+      <button class="option-button swipe" (click)="matchingSystem(placement)">Matching</button>
       <button class="option-button stud-list">Student List</button>
       <button class="option-button edit" (click)="updatePlacement(placement)">Edit</button>
       <button class="option-button delete" (click)="deletePlacement(placement)">Delete</button>
