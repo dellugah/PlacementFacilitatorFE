@@ -46,7 +46,13 @@ export class ConnectionService {
   // private baseUrl = 'http://localhost:8080/api/';
   private baseUrl =  'https://placementfacilitator-production.up.railway.app/api/'
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    // this.resetHeaders();
+  }
+
+  // public resetHeaders() {
+  //   this.headers = new HttpHeaders().set('Content-Type', 'application/json');
+  // }
 
   private get headers(): HttpHeaders {
     const tokenValue = this.getToken() ? `Bearer ${this.getToken()}` : '';

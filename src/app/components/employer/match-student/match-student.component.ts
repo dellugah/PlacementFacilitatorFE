@@ -1,10 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {PlacementDTO} from '../../../DTOs/ProfileDTO';
 import {ActivatedRoute} from '@angular/router';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-match-student',
-  imports: [],
+  imports: [
+    NgOptimizedImage,
+    NgIf
+  ],
   templateUrl: './match-student.component.html',
   styleUrl: './match-student.component.css'
 })

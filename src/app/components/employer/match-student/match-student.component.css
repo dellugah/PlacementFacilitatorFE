@@ -1,0 +1,122 @@
+.studentProfileCard{
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 20em;
+  margin: 1em;
+  border-radius: .5em;
+  border: 1px solid #cfcfcf;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);
+  transition: all .1s ease-in-out;
+  align-items: center;
+  background-color: #ffffff;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profilePhoto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profilePhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nameSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameSection h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.location-badge {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  color: #666;
+}
+
+.bioSection {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+.skillsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skillsSection h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.skillTags {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #e9ecef;
+  border-radius: 12px;
+  color: #495057;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-item a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+}
+
+.link-item {
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.link-item:hover {
+  text-decoration: underline;
+}
