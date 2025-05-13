@@ -1,13 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgOptimizedImage} from '@angular/common';
 import {ProfileService} from '../../../services/profileServices/profile.service';
-import {ProfileDTO} from '../../../DTOs/ProfileDTO';
+import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
+import {Router, RouterLink} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {ConnectionService} from '../../../services/connection/connection.service';
 
 @Component({
   selector: 'app-placements',
   imports: [
     NgOptimizedImage,
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './placements.component.html',
   standalone: true,
@@ -15,10 +19,22 @@ import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 })
 export class PlacementsComponent implements OnInit {
 
-  constructor(protected profile : ProfileService) { }
+  constructor(protected profile : ProfileService,
+              protected connection : ConnectionService,
+              private router : Router) { }
 
-  ngOnInit(){
+  async ngOnInit(){
+    const updateProfile = await this.connection.getLogIn();
+    this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
+  }
 
+  async deletePlacement(placement: PlacementDTO){
+    if(confirm('Are you sure you want to delete this placement?')){
+      console.log(placement);
+      await this.connection.postConnection(placement, 'employer/delete-placement');
+      const updateProfile = await this.connection.getLogIn();
+      this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {NgIf} from '@angular/common';
 import {ConnectionService} from '../../services/connection/connection.service';
@@ -28,26 +28,34 @@ export class SignInComponent{
     accountType: new FormControl('', [Validators.required])
   })
 
-  constructor(private connection : ConnectionService,
+  constructor(protected connection : ConnectionService,
               private router : Router) {
   }
 
   async register(){
-    const data = JSON.stringify({
-      username: this.loginForm.get('username')?.value,
-      password: this.loginForm.get('password')?.value,
-      firstName: this.loginForm.get('firstName')?.value,
-      lastName: this.loginForm.get('lastName')?.value,
-      companyName: this.loginForm.get('companyName')?.value,
-      email: this.loginForm.get('email')?.value,
-      accountType: this.loginForm.get('accountType')?.value
-    })
-    const session = await this.connection.postConnection(data, 'auth/signup') as { token: string; homePage: string; expiresIn: number };
-    this.connection.setToken(session.token);
-    this.connection.setExpiresIn(session.expiresIn);
-    this.connection.setHomePage(session.homePage);
 
-    await this.router.navigate([this.connection.getHomePage]);
+    if(this.loginForm.invalid){
+      //TODO: IMPLEMENT BETTER ERROR HANDLING
+      console.log('invalid');
+      return;
+    }else{
+
+      const data = JSON.stringify({
+        username: this.loginForm.get('username')?.value,
+        password: this.loginForm.get('password')?.value,
+        firstName: this.loginForm.get('firstName')?.value,
+        lastName: this.loginForm.get('lastName')?.value,
+        companyName: this.loginForm.get('companyName')?.value,
+        email: this.loginForm.get('email')?.value,
+        accountType: this.loginForm.get('accountType')?.value
+      })
+
+      const session = await this.connection.postConnection(data, 'auth/signup') as { token: string; homePage: string; expiresIn: number };
+      this.connection.setToken(session.token);
+      this.connection.setExpiresIn(session.expiresIn);
+      this.connection.setHomePage(session.homePage);
+
+      await this.router.navigate([this.connection.getHomePage]);
+    }
   }
-
 }

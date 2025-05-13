@@ -1,8 +1,8 @@
 <form [formGroup]="loginForm" class="signInContainer">
   <h1>Sign <span class="red">In</span></h1>
     <div class="inputContainer">
-      <label class="loginLabel" for="accountType">Account Type</label>
-      <select class="signInCredentials"
+      <label class="labelGeneral" for="accountType">Account Type</label>
+      <select class="inputGeneral"
               id="accountType"
               formControlName="accountType"
               required>
@@ -15,8 +15,8 @@
   <div *ngIf="loginForm.get('accountType')?.value !== ''">
     <div class="inputContainer" *ngIf="loginForm.get('accountType')?.value === 'EMPLOYER'">
       <div class="inputContainer">
-        <label class="loginLabel" for="companyName">Company Name</label>
-        <input class="signInCredentials"
+        <label class="labelGeneral" for="companyName">Company Name</label>
+        <input class="inputGeneral"
                id="companyName"
                type="text"
                formControlName="companyName"
@@ -26,8 +26,8 @@
 
     <div class="inputContainer" *ngIf="loginForm.get('accountType')?.value === 'STUDENT'">
       <div class="inputContainer">
-        <label class="loginLabel" for="firstName">First Name</label>
-        <input class="signInCredentials"
+        <label class="labelGeneral" for="firstName">First Name</label>
+        <input class="inputGeneral"
                id="firstName"
                type="text"
                formControlName="firstName"
@@ -35,8 +35,8 @@
       </div>
 
       <div class="inputContainer">
-        <label class="loginLabel" for="lastName">Last Name</label>
-        <input class="signInCredentials"
+        <label class="labelGeneral" for="lastName">Last Name</label>
+        <input class="inputGeneral"
                id="lastName"
                type="text"
                formControlName="lastName"
@@ -45,8 +45,8 @@
     </div>
 
     <div class="inputContainer">
-      <label class="loginLabel" for="username">Username</label>
-      <input class="signInCredentials"
+      <label class="labelGeneral" for="username">Username</label>
+      <input class="inputGeneral"
              id="username"
              type="text"
              formControlName="username"
@@ -56,8 +56,8 @@
     </div>
 
     <div class="inputContainer">
-      <label class="loginLabel" for="password">Password</label>
-      <input class="signInCredentials"
+      <label class="labelGeneral" for="password">Password</label>
+      <input class="inputGeneral"
              id="password"
              type="password"
              formControlName="password"
@@ -67,8 +67,8 @@
     </div>
 
     <div class="inputContainer">
-      <label class="loginLabel" for="email">Email</label>
-      <input class="signInCredentials"
+      <label class="labelGeneral" for="email">Email</label>
+      <input class="inputGeneral"
              id="email"
              type="email"
              formControlName="email"
@@ -78,7 +78,7 @@
 </div>
   <div class="buttonContainer">
     <button class="redButton" (click)="register()" *ngIf="loginForm.get('accountType')?.value !== ''">Register</button>
-    <button class="blackButton" routerLink="/" >Back</button>
+    <button class="blackButton" [routerLink]="['../']" >Back</button>
   </div>
 
 

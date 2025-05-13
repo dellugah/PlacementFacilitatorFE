@@ -4,6 +4,7 @@ import { EmployerProfileComponent } from './components/employer/employer-profile
 import {SignInComponent} from './components/sign-in/sign-in.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile/student-profile.component';
 import { PlacementsComponent } from './components/employer/placements/placements.component';
+import { AddPlacementComponent } from './components/employer/add-placement/add-placement.component';
 
 
 export const routes: Routes = [
@@ -15,7 +16,8 @@ export const routes: Routes = [
     path: 'employer',
     component: EmployerProfileComponent,
     children: [
-      { path: 'placements', component: PlacementsComponent }
+      { path: 'placements', component: PlacementsComponent },
+      { path: 'add', component: AddPlacementComponent}
     ]
   },
   {

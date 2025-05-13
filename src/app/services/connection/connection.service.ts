@@ -70,7 +70,6 @@ export class ConnectionService {
 
   public async getConnection(data: any, endpoint: string) {
     try {
-      console.log('Authorization header:', this.headers.get('Authorization'));
       return await firstValueFrom(
         this.http.post(`${this.baseUrl}${endpoint}`, data, {
           headers: this.headers
@@ -84,7 +83,6 @@ export class ConnectionService {
 
   public async getLogIn() {
     try {
-      console.log('Authorization header:', this.headers.get('Authorization'));
       return await firstValueFrom(
         this.http.get(`${this.baseUrl}users/me`, {
           headers: this.headers

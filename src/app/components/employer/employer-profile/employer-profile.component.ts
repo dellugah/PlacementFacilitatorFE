@@ -22,13 +22,13 @@ export class EmployerProfileComponent implements OnInit {
 
   profile$!: BehaviorSubject<ProfileDTO>;
 
-  constructor(private connection : ConnectionService,
+  constructor(protected connection : ConnectionService,
               protected profile : ProfileService) { }
 
     async ngOnInit(){
     const loginData = await this.connection.getLogIn();
     console.log(loginData);
-    this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO); 
+    this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO);
     this.profile$ = this.profile.profile;
   }
 

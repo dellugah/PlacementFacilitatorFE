@@ -1,8 +1,8 @@
-<form [formGroup]="loginForm" class="loginContainer">
+<form [formGroup]="loginForm" class="formContainer">
   <h1>Log <span class="red">In</span></h1>
   <div class="inputContainer">
-    <label class="loginLabel" for="username">Username</label>
-    <input class="signInCredentials"
+    <label class="labelGeneral" for="username">Username</label>
+    <input class="inputGeneral"
            id="username"
            type="text"
            formControlName="username"
@@ -11,8 +11,8 @@
   </div>
 
   <div class="inputContainer">
-    <label class="loginLabel" for="password">Password</label>
-    <input class="signInCredentials"
+    <label class="labelGeneral" for="password">Password</label>
+    <input class="inputGeneral"
            id="password"
            type="password"
            formControlName="password"
@@ -24,6 +24,6 @@
   </div>
   <div class="buttonContainer">
     <button class="redButton" (click)="login()">Log in</button>
-    <button class="blackButton" routerLink="register">Sign In</button>
+    <button class="blackButton" [routerLink]="['/register']">Sign In</button>
   </div>
 </form>

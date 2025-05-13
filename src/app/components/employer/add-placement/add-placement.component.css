@@ -1,0 +1,27 @@
+.positionForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;  /* Changed from center to flex-start */
+  margin-top: 2em;
+  height: 70vh;
+  scroll-behavior: smooth;
+}
+
+.skillContainer{
+  user-select: none;
+  background-color: #f6f9ff;
+  border-radius: 1em;
+  margin: 1em;
+  padding: 1em;
+  width: 20em;
+  height: 10em;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-height: 20vh;
+  align-items: center;
+  overflow-y: auto; /* or scroll */
+  overflow-x: hidden;
+}

@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 body{
   font-family:"Open Sans",sans-serif;
   background-color: #edfaff;
@@ -47,4 +48,61 @@ button{
 router-outlet{
   max-height: 0;
   max-width: 0;
+}
+
+.inputGeneral{
+  height: 3em;
+  width: 15em;
+  border-radius: 1em;
+  border: 1px none;
+  padding-left: 1em;
+  padding-right: 1em;
+  outline: none;
+  background-color: #f6f9ff;
+}
+
+.labelGeneral{
+  font-size: 1em;
+}
+
+.formContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-gap: .5em;
+}
+
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.greyBubbles{
+  border: 1px solid #cfcfcf;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);
+  background-color: #f8f8f8;
+  border-radius: 1.5em;
+  padding: .5em 1em;
+  margin: .2em;
+}
+
+.greyBubbles:hover{
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: #f1f8ff;
+  border-color: #009dff;
+  cursor: pointer;
+}
+
+.bubbleSelected{
+  background-color: #f1f8ff;
+  border-color: #009dff;
 }

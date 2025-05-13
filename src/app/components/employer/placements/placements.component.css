@@ -7,6 +7,7 @@
   align-items: flex-start;  /* Changed from center to flex-start */
   margin-top: 2em;
   height: 70vh;
+  scroll-behavior: smooth;
 }
 .placement{
   display: grid;

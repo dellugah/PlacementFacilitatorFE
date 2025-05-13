@@ -7,12 +7,12 @@
       <button class="option-button swipe">Matching</button>
       <button class="option-button stud-list">Student List</button>
       <button class="option-button edit">Edit</button>
-      <button class="option-button delete">Delete</button>
+      <button class="option-button delete" (click)="deletePlacement(placement)">Delete</button>
     </div>
   </div>
 
 
-  <div class="placement add">
+  <div class="placement add" routerLink="/employer/add">
     <img class="addImage" ngSrc="/add.png" alt="ADD" height="80" width="80">
   </div>
 </div>

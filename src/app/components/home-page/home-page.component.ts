@@ -16,7 +16,7 @@ import {ConnectionService} from '../../services/connection/connection.service';
 })
 export class HomePageComponent {
   constructor(private router : Router,
-              private connection : ConnectionService) {
+              protected connection : ConnectionService) {
   }
 
   loginForm = new FormGroup({
@@ -25,17 +25,21 @@ export class HomePageComponent {
   });
 
   async login() {
-      let data = JSON.stringify({
-        username: this.loginForm.get('username')?.value,
-        password: this.loginForm.get('password')?.value
-      })
-      const session = await this.connection.postConnection(data, 'auth/login') as { token: string; homePage: string; expiresIn: number }
-      console.log(session);
-      this.connection.setToken(session.token);
-      this.connection.setExpiresIn(session.expiresIn);
-      this.connection.setHomePage(session.homePage);
-      console.log(this.connection.getHomePage());
 
-      await this.router.navigate([this.connection.getHomePage()]);
+    if (this.loginForm.invalid){
+      return;
+    }
+    let data = JSON.stringify({
+      username: this.loginForm.get('username')?.value,
+      password: this.loginForm.get('password')?.value
+    })
+    //TODO: CHANGE TOKEN HANDLING SO IT IS NOT HANDLED ON THE CLIENT SIDE
+    let session = await this.connection.postConnection(data, 'auth/login') as { token: string; homePage: string; expiresIn: number }
+
+    this.connection.setToken(session.token);
+    this.connection.setExpiresIn(session.expiresIn);
+    this.connection.setHomePage(session.homePage);
+
+    await this.router.navigate([this.connection.getHomePage()]);
   }
 }
