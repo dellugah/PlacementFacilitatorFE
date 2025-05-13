@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgOptimizedImage} from '@angular/common';
 import {ProfileService} from '../../../services/profileServices/profile.service';
 import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
-import {Router, RouterLink} from '@angular/router';
+import {Router, RouterLink, ActivatedRoute } from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {ConnectionService} from '../../../services/connection/connection.service';
 
@@ -19,6 +19,8 @@ import {ConnectionService} from '../../../services/connection/connection.service
 })
 export class PlacementsComponent implements OnInit {
 
+  placement: PlacementDTO = new PlacementDTO();
+
   constructor(protected profile : ProfileService,
               protected connection : ConnectionService,
               private router : Router) { }
@@ -26,7 +28,8 @@ export class PlacementsComponent implements OnInit {
   async ngOnInit(){
     const updateProfile = await this.connection.getLogIn();
     this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
-  }
+
+}
 
   async deletePlacement(placement: PlacementDTO){
     if(confirm('Are you sure you want to delete this placement?')){
@@ -36,5 +39,12 @@ export class PlacementsComponent implements OnInit {
       this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
     }
   }
+
+  async updatePlacement(placement: PlacementDTO) {
+    await this.router.navigate(['employer/update-placement'], {
+      queryParams: { data: JSON.stringify(placement) }
+    });
+  }
+
 
 }

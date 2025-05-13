@@ -58,11 +58,13 @@ export class ConnectionService {
 
   public async postConnection(data: any, endpoint: string) {
     try {
-      return await firstValueFrom(
-        this.http.post(`${this.baseUrl}${endpoint}`, data, {
+      const response = await firstValueFrom(
+        this.http.post(this.baseUrl + endpoint, data, {
           headers: this.headers
         })
       );
+      console.log(response);
+      return response;
     } catch (error) {
       console.error('Error:', error);
       return {};
@@ -94,6 +96,4 @@ export class ConnectionService {
       return {};
     }
   }
-
-
 }

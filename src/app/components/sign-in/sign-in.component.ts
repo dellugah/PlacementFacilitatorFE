@@ -51,11 +51,12 @@ export class SignInComponent{
       })
 
       const session = await this.connection.postConnection(data, 'auth/signup') as { token: string; homePage: string; expiresIn: number };
+      console.log(session);
       this.connection.setToken(session.token);
       this.connection.setExpiresIn(session.expiresIn);
       this.connection.setHomePage(session.homePage);
 
-      await this.router.navigate([this.connection.getHomePage]);
+      await this.router.navigate([this.connection.getHomePage()]);
     }
   }
 }
