@@ -11,6 +11,7 @@
   background: linear-gradient(to bottom, #f1f8ff, #ffffff 20%);
   gap: 1rem;
   padding: 1.5rem;
+  max-height: 50vh;
 }
 
 .profileHeader {
