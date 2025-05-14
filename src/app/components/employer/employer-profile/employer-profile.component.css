@@ -10,8 +10,6 @@
   display: flex;
   justify-content: center;
   align-items: center; /* viewport height */
-  overflow-y: auto; /* or scroll */
-  overflow-x: hidden;
 }
 
 .contentArea{

@@ -1,9 +1,9 @@
 .studentProfileCard{
   display: flex;
   flex-direction: column;
-  width: 37vh;
+  margin-top: 4vh;
+  width: 35vh;
   height: 100%;
-  margin: 1em;
   border-radius: .5em;
   border: 1px solid #cfcfcf;
   box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);
@@ -82,15 +82,11 @@ h2{
 }
 
 .skillsSection {
+  font-size: 1.5vh;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
 
-.skillsSection{
-  margin: 0;
-  font-size: 1rem;
-  color: #333;
+  gap: 0.5rem;
 }
 
 .skillTags {
@@ -102,7 +98,7 @@ h2{
 }
 
 .skill-tag {
-  font-size: 0.8rem;
+  font-size: 1.5vh;
   padding: 0.2rem 0.5rem;
   background-color: #e9ecef;
   border-radius: 1em;
@@ -110,7 +106,7 @@ h2{
 }
 
 .link-tag {
-  font-size: 0.8rem;
+  font-size: 1.5vh;
   padding: 0.2rem 0.5rem;
   background-color: #b9dcff;
   border-radius: 12px;
@@ -158,8 +154,8 @@ h2{
 
 .no-option{
   cursor: pointer;
-  border-bottom-left-radius: 1em;
-  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1.5vh;
+  border-top-left-radius: 1.5vh;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -176,8 +172,8 @@ h2{
 
 .yes-option{
   cursor: pointer;
-  border-bottom-right-radius: 1em;
-  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1.5vh;
+  border-top-right-radius: 1.5vh;
   display: flex;
   flex-direction: row;
   justify-content: center;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PlacementDTO} from '../../../DTOs/ProfileDTO';
+import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {ActivatedRoute} from '@angular/router';
 import {NgIf, NgOptimizedImage} from '@angular/common';
 
@@ -16,6 +16,8 @@ export class MatchStudentComponent implements OnInit{
   placement: PlacementDTO = new PlacementDTO();
 
   constructor(private route: ActivatedRoute) { }
+
+  studentList: ProfileDTO[] = [];
 
   ngOnInit(){
     this.route.queryParams.subscribe(params => {
