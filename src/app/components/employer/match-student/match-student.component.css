@@ -1,7 +1,8 @@
 .studentProfileCard{
   display: flex;
   flex-direction: column;
-  width: 20em;
+  width: 37vh;
+  height: 100%;
   margin: 1em;
   border-radius: .5em;
   border: 1px solid #cfcfcf;
@@ -9,8 +10,14 @@
   transition: all .1s ease-in-out;
   align-items: center;
   background: linear-gradient(to bottom, #f1f8ff, #ffffff 20%);
-  gap: 1rem;
+  gap: .5em;
   padding: 1.5rem;
+  font-size: 1vh;
+}
+
+h3{
+  margin: 1vh;
+  color: #666;
 }
 
 .profileHeader {
@@ -37,7 +44,7 @@
   flex-direction: column;
 }
 
-.nameSection h2 {
+.nameSection {
   margin: 0;
   font-size: 1.25rem;
   color: #333;
@@ -64,10 +71,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: #666;
 }
 
-.skillsSection h3 {
+.skillsSection{
   margin: 0;
   font-size: 1rem;
   color: #333;
@@ -85,7 +91,7 @@
   font-size: 0.8rem;
   padding: 0.2rem 0.5rem;
   background-color: #e9ecef;
-  border-radius: 12px;
+  border-radius: 1em;
   color: #495057;
 }
 
@@ -190,6 +196,8 @@
 }
 
 .division{
+  margin: 0;
+  padding: 0;
   width: 100%;
   border-bottom: 1px solid #c9e1fa;
 }
