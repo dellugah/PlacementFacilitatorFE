@@ -10,8 +10,7 @@
 .employer-router{
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 70vh; /* viewport height */
+  align-items: center; /* viewport height */
   overflow-y: auto; /* or scroll */
   overflow-x: hidden;
 }
