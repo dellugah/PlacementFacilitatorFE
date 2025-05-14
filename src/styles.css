@@ -106,3 +106,13 @@ router-outlet{
   background-color: #f1f8ff;
   border-color: #009dff;
 }
+
+.match-options
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+  width: 20vh;
+}

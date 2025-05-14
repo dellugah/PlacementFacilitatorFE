@@ -1,5 +1,3 @@
-<h2>Matching for the {{placement.positionName}} position</h2>
-
 <div class="studentProfileCard">
   <!-- Profile Header with Photo -->
   <div class="profileHeader">
@@ -12,6 +10,7 @@
     </div>
   </div>
 
+  <div class="division"></div>
   <!-- Bio Section -->
   <div class="bioSection">
     <h3>Bio</h3>
@@ -20,6 +19,7 @@
   </div>
 
   <!-- Skills Section -->
+  <div class="division"></div>
   <div class="skillsSection">
     <h3>Technical Skills</h3>
     <div class="skillTags">
@@ -33,15 +33,26 @@
   </div>
 
   <!-- Contact Section -->
+  <div class="division"></div>
   <div class="contactSection">
     <div class="links">
-      <a *ngIf="true" [href]="" target="_blank" class="link-item">
-        <i class="fas fa-link"></i> Link 1
+      <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+        <i class="fas fa-link">LinkedIn</i>
       </a>
-      <a *ngIf="true" [href]="" target="_blank" class="link-item">
-        <i class="fas fa-link"></i> Link 2
+      <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+        <i class="fas fa-link">Github</i>
+      </a>
+      <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+        <i class="fas fa-link">Resume</i>
       </a>
     </div>
+  </div>
+  <div class="division"></div>
+
+  <div class="match-options">
+    <div class="no-option"><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
+    <div class="go-back"><img ngSrc="/voltar.png" alt="rewind" height="40" width="40"></div>
+    <div class="yes-option"><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
   </div>
 </div>
 

@@ -1,7 +1,6 @@
 .studentProfileCard{
   display: flex;
   flex-direction: column;
-  height: 50vh;
   width: 20em;
   margin: 1em;
   border-radius: .5em;
@@ -9,7 +8,7 @@
   box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);
   transition: all .1s ease-in-out;
   align-items: center;
-  background-color: #ffffff;
+  background: linear-gradient(to bottom, #f1f8ff, #ffffff 20%);
   gap: 1rem;
   padding: 1.5rem;
 }
@@ -65,6 +64,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  color: #666;
 }
 
 .skillsSection h3 {
@@ -87,6 +87,21 @@
   background-color: #e9ecef;
   border-radius: 12px;
   color: #495057;
+}
+
+.link-tag {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  background-color: #b9dcff;
+  border-radius: 12px;
+  color: #000000;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+}
+
+.link-tag:hover {
+  background-color: #009dff;
+  color: #ffffff;
 }
 
 .contactSection {
@@ -119,4 +134,62 @@
 
 .link-item:hover {
   text-decoration: underline;
+}
+
+.no-option{
+  cursor: pointer;
+  border-bottom-left-radius: 1em;
+  border-top-left-radius: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  width: 33.33%;
+  background-color: #b9dcff;
+  font-size: 1.5rem;
+}
+.no-option:hover{
+  background: linear-gradient(to top, #ff3434, #ff9595 100%);
+  color: #ffffff;
+}
+
+.yes-option{
+  cursor: pointer;
+  border-bottom-right-radius: 1em;
+  border-top-right-radius: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  width: 33.33%;
+  background-color: #b9dcff;
+  font-size: 1.5rem;
+}
+
+.yes-option:hover{
+  background: linear-gradient(to top, #42ff34, #b2ffad 100%);
+  color: #ffffff;
+}
+
+.go-back{
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  width: 33.33%;
+  background-color: #e9ecef;
+  font-size: 1.5rem;
+}
+
+.go-back:hover{
+  background: linear-gradient(to top, #ffdc1a, #ffed99 100%);
+}
+
+.division{
+  width: 100%;
+  border-bottom: 1px solid #c9e1fa;
 }
