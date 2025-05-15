@@ -211,3 +211,21 @@ h2{
   width: 100%;
   border-bottom: 1px solid #c9e1fa;
 }
+
+.message{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#message{
+  color: #666;
+  font-size: 1.5vh;
+}
+
+#warning{
+  background: linear-gradient(to bottom, #fff5d6, #ffffff 50%);
+}

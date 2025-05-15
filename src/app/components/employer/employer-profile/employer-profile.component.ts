@@ -21,14 +21,13 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 export class EmployerProfileComponent implements OnInit {
 
   profile$!: BehaviorSubject<ProfileDTO>;
+  domestic : string = '';
 
   constructor(protected connection : ConnectionService,
               protected profile : ProfileService) { }
 
     async ngOnInit(){
-    const loginData = await this.connection.getLogIn();
-    console.log(loginData);
-    this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO);
+    this.profile.profile = new BehaviorSubject<ProfileDTO>(await this.connection.getLogIn() as ProfileDTO);
     this.profile$ = this.profile.profile;
   }
 

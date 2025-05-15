@@ -1,4 +1,4 @@
-<div class="studentProfileCard">
+<div class="studentProfileCard" *ngIf="!endOfFile; else EndOfFile">
   <!-- Profile Header with Photo -->
   <div class="profileHeader">
     <div class="header-info">
@@ -6,8 +6,11 @@
         <img ngSrc="/profile.png" alt="Profile Photo" width="80" height="80">
       </div>
       <div class="nameSection">
-        <h2>Andre Machado</h2>
-        <span class="location-badge"><i class="fas fa-link">International</i></span>
+        <h2>{{studentList[index].firstName}} {{ studentList[index].lastName }}</h2>
+        <span class="location-badge" *ngIf="studentList[index].domestic; else International"><i class="fas fa-link">Domestic</i></span>
+        <ng-template #International>
+          <span class="location-badge"><i class="fas fa-link">International</i></span>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -16,8 +19,7 @@
   <!-- Bio Section -->
   <div class="bioSection">
     <h3>Bio</h3>
-    <p>Full-stack developer passionate about crafting elegant solutions to complex problems. Experienced in modern web technologies with a focus on scalable architecture. Always eager to learn and embrace new challenges. Committed to writing clean, maintainable code and sharing knowledge with the team.
-    </p>
+    <p>{{ studentList[index].bio }}</p>
   </div>
 
   <!-- Skills Section -->
@@ -25,12 +27,7 @@
   <div class="skillsSection">
     <h3>Technical Skills</h3>
     <div class="skillTags">
-      <span class="skill-tag">Placeholder</span>
-      <span class="skill-tag">Placeholder</span>
-      <span class="skill-tag">Placeholder</span>
-      <span class="skill-tag">Placeholder</span>
-      <span class="skill-tag">Placeholder</span>
-
+      <span class="skill-tag" *ngFor="let skill of studentList[index].skills">{{ skill }}</span>
     </div>
   </div>
 
@@ -52,10 +49,21 @@
   <div class="division"></div>
 
   <div class="match-options">
-    <div class="no-option"><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
-    <div class="go-back"><img ngSrc="/voltar.png" alt="rewind" height="40" width="40"></div>
-    <div class="yes-option"><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
+    <div class="no-option" (click)="nextStudent()"><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
+    <div class="go-back" (click)="previousStudent()"><img ngSrc="/voltar.png" alt="rewind" height="40" width="40"></div>
+    <div class="yes-option" (click)="insertStudent()"><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
   </div>
 </div>
-
+<ng-template #EndOfFile>
+  <div class="studentProfileCard" id="warning">
+    <div class="message">
+      <h2>You have reached the end!</h2>
+      <h2><span id="message">Would you like to restart?</span></h2>
+      <div>
+        <button class="option-button" (click)="reset()">Restart</button>
+        <button class="option-button">Go to chosen Students</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
 

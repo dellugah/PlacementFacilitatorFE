@@ -44,7 +44,7 @@ export class ConnectionService {
   }
 
   // private baseUrl = 'http://localhost:8080/api/';
-  private baseUrl =  'https://placementfacilitator-production.up.railway.app/api/'
+  private baseUrl =  'https://placementfacilitator-production.up.railway.app/api/';
 
   constructor(private http: HttpClient) {
     // this.resetHeaders();
@@ -77,18 +77,34 @@ export class ConnectionService {
     }
   }
 
-  public async getConnection(data: any, endpoint: string) {
+  public async getConnection(endpoint: string) {
     try {
       return await firstValueFrom(
-        this.http.post(`${this.baseUrl}${endpoint}`, data, {
+        this.http.get(this.baseUrl + endpoint, {
           headers: this.headers
         })
       );
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error accessing endpoint:', error);
       return {};
     }
   }
+
+  public async getStudList<T = any[]>(endpoint: string): Promise<T> {
+    try {
+      const response = await firstValueFrom(
+        this.http.get<T>(this.baseUrl + endpoint, {
+          headers: this.headers
+        })
+      );
+      // Return the actual array from the Zone.js wrapper
+      return (response as any).__zone_symbol__value || response;
+    } catch (error) {
+      console.error('Error accessing endpoint:', error);
+      return [] as T; // Return empty array instead of empty object
+    }
+  }
+
 
   public async getLogIn() {
     try {

@@ -116,3 +116,15 @@ router-outlet{
   margin-bottom: 1em;
   width: 20vh;
 }
+
+.option-button{
+  border-radius: .5em;
+  padding: .5em;
+  background-color: #f1f8ff;
+  border: 1px solid #cfcfcf;
+}
+
+.option-button:hover{
+  background-color: #9ad2ff;
+  border-color: #009dff;
+}
