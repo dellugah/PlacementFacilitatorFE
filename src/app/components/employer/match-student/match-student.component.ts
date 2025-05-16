@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {ConnectionService} from '../../../services/connection/connection.service';
 import {ProfileService} from '../../../services/profileServices/profile.service';
-import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-match-student',
@@ -22,13 +21,12 @@ export class MatchStudentComponent implements OnInit{
 
   constructor(private route: ActivatedRoute,
               protected connection : ConnectionService,
-              protected profile : ProfileService) { }
+              protected profile : ProfileService,
+              private router : Router) { }
 
   studentList: ProfileDTO[] = new Array<ProfileDTO>();
   index : number = 0;
   endOfFile : boolean = false;
-
-
   possibleStudents: ProfileDTO[] = [];
 
   async ngOnInit(){
@@ -42,8 +40,8 @@ export class MatchStudentComponent implements OnInit{
     });
 
     await this.reset();
-
   }
+
   public async insertStudent(){
     const response = await this.connection.postConnection({
         placementId : this.placement.placementId,
@@ -102,13 +100,19 @@ export class MatchStudentComponent implements OnInit{
 
       this.endOfFile = false;
       this.index = 0;
-      await this.Effect()
+      await this.style()
     } catch (error) {
       console.error('Error fetching student list:', error);
     }
   }
 
-  public async Effect(){
+  async placementStudentList(placement: PlacementDTO){
+    await this.router.navigate(['employer/placement-student-list'], {
+      queryParams: { data: JSON.stringify(placement) }
+    });
+  }
+
+  public async style(){
     const noOption = document.querySelector('.no-option') as HTMLElement;
     const yesOption = document.querySelector('.yes-option') as HTMLElement;
     const goBackOption = document.querySelector('.go-back') as HTMLElement;

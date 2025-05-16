@@ -29,7 +29,12 @@ export class EmployerProfileComponent implements OnInit {
     async ngOnInit(){
     this.profile.profile = new BehaviorSubject<ProfileDTO>(await this.connection.getLogIn() as ProfileDTO);
     this.profile$ = this.profile.profile;
+    this.profileStyle()
   }
 
+  private profileStyle(){
+    const mainContainer = document.querySelector('.mainContainer') as HTMLElement;
+    mainContainer.style.background = 'linear-gradient(to bottom, #f1f8ff, #ffffff 20%)';
+  }
 
 }

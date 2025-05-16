@@ -1,68 +1,79 @@
-<div class="studentProfileCard" *ngIf="!endOfFile; else EndOfFile">
-  <!-- Profile Header with Photo -->
-  <div class="profileHeader">
-    <div class="header-info">
-      <div class="profilePhoto">
-        <img ngSrc="/profile.png" alt="Profile Photo" width="80" height="80">
+<div *ngIf="studentList.length > 0; else noStudents">
+  <div class="studentProfileCard" *ngIf="!endOfFile; else EndOfFile">
+    <!-- Profile Header with Photo -->
+    <div class="profileHeader">
+      <div class="header-info">
+        <div class="profilePhoto">
+          <img ngSrc="/student.png" alt="Profile Photo" width="80" height="80">
+        </div>
+        <div class="nameSection">
+          <h2>{{studentList[index].firstName}} {{ studentList[index].lastName }}</h2>
+          <span class="location-badge" *ngIf="studentList[index].domestic; else International"><i class="fas fa-link">Domestic</i></span>
+          <ng-template #International>
+            <span class="location-badge"><i class="fas fa-link">International</i></span>
+          </ng-template>
+        </div>
       </div>
-      <div class="nameSection">
-        <h2>{{studentList[index].firstName}} {{ studentList[index].lastName }}</h2>
-        <span class="location-badge" *ngIf="studentList[index].domestic; else International"><i class="fas fa-link">Domestic</i></span>
-        <ng-template #International>
-          <span class="location-badge"><i class="fas fa-link">International</i></span>
-        </ng-template>
+    </div>
+
+    <div class="division"></div>
+    <!-- Bio Section -->
+    <div class="bioSection">
+      <h3>Bio</h3>
+      <p>{{ studentList[index].bio }}</p>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="division"></div>
+    <div class="skillsSection">
+      <h3>Technical Skills</h3>
+      <div class="skillTags">
+        <span class="skill-tag" *ngFor="let skill of studentList[index].skills">{{ skill }}</span>
       </div>
     </div>
-  </div>
 
-  <div class="division"></div>
-  <!-- Bio Section -->
-  <div class="bioSection">
-    <h3>Bio</h3>
-    <p>{{ studentList[index].bio }}</p>
-  </div>
+    <!-- Contact Section -->
+    <div class="division"></div>
+    <div class="contactSection">
+      <div class="links">
+        <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+          <i class="fas fa-link">LinkedIn</i>
+        </a>
+        <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+          <i class="fas fa-link">Github</i>
+        </a>
+        <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+          <i class="fas fa-link">Resume</i>
+        </a>
+      </div>
+    </div>
+    <div class="division"></div>
 
-  <!-- Skills Section -->
-  <div class="division"></div>
-  <div class="skillsSection">
-    <h3>Technical Skills</h3>
-    <div class="skillTags">
-      <span class="skill-tag" *ngFor="let skill of studentList[index].skills">{{ skill }}</span>
+    <div class="match-options">
+      <div class="no-option" (click)="nextStudent()"><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
+      <div class="go-back" (click)="previousStudent()"><img ngSrc="/voltar.png" alt="rewind" height="40" width="40"></div>
+      <div class="yes-option" (click)="insertStudent()"><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
     </div>
   </div>
-
-  <!-- Contact Section -->
-  <div class="division"></div>
-  <div class="contactSection">
-    <div class="links">
-      <a *ngIf="true" [href]="" target="_blank" class="link-tag">
-        <i class="fas fa-link">LinkedIn</i>
-      </a>
-      <a *ngIf="true" [href]="" target="_blank" class="link-tag">
-        <i class="fas fa-link">Github</i>
-      </a>
-      <a *ngIf="true" [href]="" target="_blank" class="link-tag">
-        <i class="fas fa-link">Resume</i>
-      </a>
+  <ng-template #EndOfFile>
+    <div class="studentProfileCard" id="warning">
+      <div class="message">
+        <h2>You have reached the end!</h2>
+        <h2><span id="message">Would you like to restart?</span></h2>
+        <div>
+          <button class="option-button" (click)="reset()">Restart</button>
+          <button class="option-button" (click)="placementStudentList(placement)">Go to chosen Students</button>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="division"></div>
-
-  <div class="match-options">
-    <div class="no-option" (click)="nextStudent()"><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
-    <div class="go-back" (click)="previousStudent()"><img ngSrc="/voltar.png" alt="rewind" height="40" width="40"></div>
-    <div class="yes-option" (click)="insertStudent()"><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
-  </div>
+  </ng-template>
 </div>
-<ng-template #EndOfFile>
+<ng-template #noStudents>
   <div class="studentProfileCard" id="warning">
     <div class="message">
-      <h2>You have reached the end!</h2>
-      <h2><span id="message">Would you like to restart?</span></h2>
-      <div>
-        <button class="option-button" (click)="reset()">Restart</button>
-        <button class="option-button">Go to chosen Students</button>
-      </div>
+      <h2>No Students</h2>
+      <h2><span id="message">There are no students to match.</span></h2>
+      <button class="option-button">Go to chosen Students</button>
     </div>
   </div>
 </ng-template>

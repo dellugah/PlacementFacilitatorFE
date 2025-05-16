@@ -7,6 +7,9 @@ import { PlacementsComponent } from './components/employer/placements/placements
 import { AddPlacementComponent } from './components/employer/add-placement/add-placement.component';
 import {EditPlacementComponent} from './components/employer/edit-placement/edit-placement.component';
 import {MatchStudentComponent} from './components/employer/match-student/match-student.component';
+import {
+  PlacementStudentListComponent
+} from './components/employer/placement-student-list/placement-student-list.component';
 
 
 export const routes: Routes = [
@@ -22,6 +25,7 @@ export const routes: Routes = [
       { path: 'add', component: AddPlacementComponent},
       { path: 'update-placement', component: EditPlacementComponent},
       { path: 'matching', component : MatchStudentComponent},
+      { path: 'placement-student-list', component: PlacementStudentListComponent},
     ]
   },
   {

@@ -52,5 +52,11 @@ export class PlacementsComponent implements OnInit {
     });
   }
 
+  async placementStudentList(placement: PlacementDTO){
+    await this.router.navigate(['employer/placement-student-list'], {
+      queryParams: { data: JSON.stringify(placement) }
+    });
+  }
+
 
 }

@@ -1,0 +1,16 @@
+.rowLayout{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  scroll-behavior: smooth;
+  overflow-y: auto;    /* Changed from 'hidden' to 'auto' */
+  height: 70vh;
+}
+
+.studentProfileCard{
+  max-height: 40vh;
+}
