@@ -45,8 +45,7 @@ export class MatchStudentComponent implements OnInit{
 
   }
   public async insertStudent(){
-    const response = await this.connection.postConnection(
-      {
+    const response = await this.connection.postConnection({
         placementId : this.placement.placementId,
         studentId : this.studentList[this.index].profileId
       }, 'employer/match-student').then(
@@ -54,13 +53,20 @@ export class MatchStudentComponent implements OnInit{
           this.placement.potentialCandidates.push(this.studentList[this.index]);
         }
     );
-    if(this.index <= this.studentList.length - 1){
+    if(this.index >= this.studentList.length - 1){
+      this.endOfFile = true;
+    }
+    else if(this.index <= this.studentList.length - 1){
       this.index++;
     }
   }
   public previousStudent(){
     if(this.index > 0){
       this.index--;
+    }
+    if(this.index == 0){
+      const goBackOption = document.querySelector('.go-back') as HTMLElement;
+      goBackOption.style.background = 'linear-gradient(to right, #ffed99, #ffffff 10%)';
     }
   }
 
@@ -131,7 +137,6 @@ export class MatchStudentComponent implements OnInit{
     goBackOption?.addEventListener('mouseleave', () => {
         profileCard.style.background = ''; // Reset to default
     });
-
   }
 }
 
