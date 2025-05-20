@@ -1,5 +1,5 @@
 <div *ngIf="studentList.length > 0; else noStudents">
-  <div class="studentProfileCard" *ngIf="!endOfFile; else EndOfFile">
+  <div #profileCard class="studentProfileCard" *ngIf="!endOfFile; else EndOfFile">
     <!-- Profile Header with Photo -->
     <div class="profileHeader">
       <div class="header-info">
@@ -50,9 +50,17 @@
     <div class="division"></div>
 
     <div class="match-options">
-      <div class="no-option" (click)="nextStudent()"><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
+      <div #noOption class="no-option"
+           (click)="nextStudent()"
+           (mouseenter)="onNoOptionEnter()"
+           (mouseleave)="onNoOptionLeave()"
+      ><img ngSrc="/cancelar.png" alt="no" height="32" width="32"></div>
       <div class="go-back" (click)="previousStudent()"><img ngSrc="/voltar.png" alt="rewind" height="40" width="40"></div>
-      <div class="yes-option" (click)="insertStudent()"><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
+      <div #yesOption class="yes-option"
+           (click)="insertStudent()"
+           (mouseenter)="onYesOptionEnter()"
+           (mouseleave)="onYesOptionLeave()"
+      ><img ngSrc="/marca-de-verificacao.png" alt="yes" height="32" width="32"></div>
     </div>
   </div>
   <ng-template #EndOfFile>

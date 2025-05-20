@@ -33,7 +33,7 @@ export class PlacementStudentListComponent implements OnInit{
         this.possibleStudents.forEach(student => {
         })
       }
-      const updateProfile = await this.connection.getLogIn();
+      const updateProfile = await this.connection.getProfile();
       this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
       this.selectPlacement()
     });

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
@@ -16,7 +16,7 @@ import {ProfileService} from '../../../services/profileServices/profile.service'
   styleUrl: './match-student.component.css'
 })
 
-export class MatchStudentComponent implements OnInit{
+export class MatchStudentComponent implements OnInit {
   placement: PlacementDTO = new PlacementDTO();
 
   constructor(private route: ActivatedRoute,
@@ -38,7 +38,6 @@ export class MatchStudentComponent implements OnInit{
         })
       }
     });
-
     await this.reset();
   }
 
@@ -61,10 +60,6 @@ export class MatchStudentComponent implements OnInit{
   public previousStudent(){
     if(this.index > 0){
       this.index--;
-    }
-    if(this.index == 0){
-      const goBackOption = document.querySelector('.go-back') as HTMLElement;
-      goBackOption.style.background = 'linear-gradient(to right, #ffed99, #ffffff 10%)';
     }
   }
 
@@ -100,7 +95,6 @@ export class MatchStudentComponent implements OnInit{
 
       this.endOfFile = false;
       this.index = 0;
-      await this.style()
     } catch (error) {
       console.error('Error fetching student list:', error);
     }
@@ -112,36 +106,27 @@ export class MatchStudentComponent implements OnInit{
     });
   }
 
-  public async style(){
-    const noOption = document.querySelector('.no-option') as HTMLElement;
-    const yesOption = document.querySelector('.yes-option') as HTMLElement;
-    const goBackOption = document.querySelector('.go-back') as HTMLElement;
-    const profileCard = document.querySelector('.studentProfileCard') as HTMLElement;
+  @ViewChild('noOption') noOption!: ElementRef;
+  @ViewChild('yesOption') yesOption!: ElementRef;
+  @ViewChild('profileCard') profileCard!: ElementRef;
 
-
-    noOption?.addEventListener('mouseenter', () => {
-        profileCard.style.background = 'linear-gradient(to bottom, #ffc5c5, #ffffff 50%)';
-    });
-
-    noOption?.addEventListener('mouseleave', () => {
-        profileCard.style.background = ''; // Reset to default
-    });
-
-    yesOption?.addEventListener('mouseenter', () => {
-        profileCard.style.background = 'linear-gradient(to bottom, #c5ffc5, #ffffff 50%)';
-    });
-
-    yesOption?.addEventListener('mouseleave', () => {
-        profileCard.style.background = ''; // Reset to default
-    });
-
-    goBackOption?.addEventListener('mouseenter', () => {
-        profileCard.style.background = 'linear-gradient(to right, #ffed99, #ffffff 10%)';
-    });
-    goBackOption?.addEventListener('mouseleave', () => {
-        profileCard.style.background = ''; // Reset to default
-    });
+  // Use these methods with (mouseenter) and (mouseleave) in template
+  onNoOptionEnter() {
+    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #ffc5c5, #ffffff 50%)';
   }
+
+  onNoOptionLeave() {
+    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #f1f8ff, #ffffff 20%)';
+  }
+
+  onYesOptionEnter() {
+    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #c5ffc5, #ffffff 50%)';
+  }
+
+  onYesOptionLeave() {
+    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #f1f8ff, #ffffff 20%)';
+  }
+
 }
 
 

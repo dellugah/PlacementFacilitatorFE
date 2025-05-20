@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {ConnectionService} from '../../services/connection/connection.service';
@@ -14,7 +14,7 @@ import {ConnectionService} from '../../services/connection/connection.service';
   standalone: true,
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
   constructor(private router : Router,
               protected connection : ConnectionService) {
   }
@@ -24,6 +24,9 @@ export class HomePageComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
+  ngOnInit(){
+    this.profileStyle();
+  }
   async login() {
 
     if (this.loginForm.invalid){
@@ -41,5 +44,10 @@ export class HomePageComponent {
     this.connection.setHomePage(session.homePage);
 
     await this.router.navigate([this.connection.getHomePage()]);
+  }
+
+  private profileStyle(){
+    const mainContainer = document.querySelector('.mainContainer') as HTMLElement;
+    mainContainer.style.background = '#ffffff';
   }
 }

@@ -58,11 +58,11 @@ export class EditPlacementComponent implements OnInit{
       console.log('invalid');
       return;
     }else{
-      this.skillClass.forEach(skill => {
-        if(skill.class === "greyBubbles bubbleSelected"){
-          const requiredSkills = this.formGroup.get('requiredSkills');
-        }
-      })
+      // this.skillClass.forEach(skill => {
+      //   if(skill.class === "greyBubbles bubbleSelected"){
+      //     const requiredSkills = this.formGroup.get('requiredSkills');
+      //   }
+      // })
 
       const selectedSkills = this.getSelectedSkills();
       this.formGroup.get('requiredSkills')?.setValue(selectedSkills);

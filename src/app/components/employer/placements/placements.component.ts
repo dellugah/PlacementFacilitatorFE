@@ -26,7 +26,7 @@ export class PlacementsComponent implements OnInit {
               private router : Router) { }
 
   async ngOnInit(){
-    const updateProfile = await this.connection.getLogIn();
+    const updateProfile = await this.connection.getProfile();
     this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
 
 }
@@ -35,7 +35,7 @@ export class PlacementsComponent implements OnInit {
     if(confirm('Are you sure you want to delete this placement?')){
       console.log(placement);
       await this.connection.postConnection(placement, 'employer/delete-placement');
-      const updateProfile = await this.connection.getLogIn();
+      const updateProfile = await this.connection.getProfile();
       this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
     }
   }

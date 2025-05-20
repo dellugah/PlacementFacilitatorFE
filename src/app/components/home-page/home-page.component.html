@@ -1,29 +1,30 @@
 <form [formGroup]="loginForm" class="formContainer">
-  <h1>Log <span class="red">In</span></h1>
-  <div class="inputContainer">
-    <label class="labelGeneral" for="username">Username</label>
-    <input class="inputGeneral"
-           id="username"
-           type="text"
-           formControlName="username"
-           autocomplete="username"
-           required>
-  </div>
+  <div class="flex-column">
+    <h1>Log <span class="red">In</span></h1>
+    <div class="inputContainer">
+      <label class="labelGeneral" for="username">Username</label>
+      <input class="inputGeneral"
+             id="username"
+             type="text"
+             formControlName="username"
+             autocomplete="username"
+             required>
+    </div>
 
-  <div class="inputContainer">
-    <label class="labelGeneral" for="password">Password</label>
-    <input class="inputGeneral"
-           id="password"
-           type="password"
-           formControlName="password"
-           autocomplete="current-password"
-           required
-           minlength="8"
-           aria-describedby="password-constraints">
-
-  </div>
-  <div class="buttonContainer">
-    <button class="redButton" (click)="login()">Log in</button>
-    <button class="blackButton" [routerLink]="['/register']">Sign In</button>
+    <div class="inputContainer">
+      <label class="labelGeneral" for="password">Password</label>
+      <input class="inputGeneral"
+             id="password"
+             type="password"
+             formControlName="password"
+             autocomplete="current-password"
+             required
+             minlength="8"
+             aria-describedby="password-constraints">
+    </div>
+    <div class="buttonContainer">
+      <button class="redButton" (click)="login()">Log in</button>
+      <button class="blackButton" [routerLink]="['/register']">Sign In</button>
+    </div>
   </div>
 </form>

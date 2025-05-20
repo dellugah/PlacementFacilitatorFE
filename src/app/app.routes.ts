@@ -10,6 +10,7 @@ import {MatchStudentComponent} from './components/employer/match-student/match-s
 import {
   PlacementStudentListComponent
 } from './components/employer/placement-student-list/placement-student-list.component';
+import {EditProfileComponent} from './components/student-profile/edit-profile/edit-profile.component';
 
 
 export const routes: Routes = [
@@ -34,6 +35,9 @@ export const routes: Routes = [
   },
   {
     path: 'student',
-    component: StudentProfileComponent
+    component: StudentProfileComponent,
+    children: [
+      { path: 'edit', component: EditProfileComponent },
+    ]
   }
 ];

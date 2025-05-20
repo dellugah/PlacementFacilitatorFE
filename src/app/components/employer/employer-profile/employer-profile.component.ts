@@ -20,14 +20,13 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 })
 export class EmployerProfileComponent implements OnInit {
 
-  profile$!: BehaviorSubject<ProfileDTO>;
-  domestic : string = '';
+  profile$: BehaviorSubject<ProfileDTO> = new BehaviorSubject<ProfileDTO>(new ProfileDTO());
 
   constructor(protected connection : ConnectionService,
               protected profile : ProfileService) { }
 
     async ngOnInit(){
-    this.profile.profile = new BehaviorSubject<ProfileDTO>(await this.connection.getLogIn() as ProfileDTO);
+    this.profile.profile = new BehaviorSubject<ProfileDTO>(await this.connection.getProfile() as ProfileDTO);
     this.profile$ = this.profile.profile;
     this.profileStyle()
   }

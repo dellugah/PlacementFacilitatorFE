@@ -1,0 +1,52 @@
+<div class="formContainer" [formGroup]="formGroup">
+  <div class="flex-column">
+    <div class="flex-row">
+      <div class="flex-column">
+        <div class="inputContainer">
+          <label class="labelGeneral" for="firstName">First Name</label>
+          <input class="inputGeneral" id="firstName" type="text" formControlName="firstName"
+                 [placeholder]="profile$.value.firstName">
+        </div>
+        <div class="inputContainer">
+          <label class="labelGeneral" for="lastName">Last Name</label>
+          <input class="inputGeneral" id="lastName" type="text" formControlName="lastName"
+                 [placeholder]="profile$.value.lastName">
+        </div>
+
+        <div class="inputContainer">
+          <label class="labelGeneral" for="linkedIn">Linked In</label>
+          <input class="inputGeneral" id="linkedIn" type="text" formControlName="LinkedIn"
+                 [placeholder]="profile$.value.linkOne">
+        </div>
+
+        <div class="inputContainer">
+          <label class="labelGeneral" for="gitHub">Git Hub</label>
+          <input class="inputGeneral" id="gitHub" type="text" formControlName="GitHub"
+                 [placeholder]="profile$.value.linkTwo">
+        </div>
+
+        <div class="inputContainer">
+          <label class="labelGeneral textBox" for="bio">Bio</label>
+          <textarea class="inputGeneral text-area" id="bio" rows="4" cols="50" maxlength="255"
+                    formControlName="Bio"
+                    [placeholder]="profile$.value.bio"></textarea>
+        </div>
+      </div>
+      <div class="flex-column">
+        <div class="inputContainer">
+          <label class="labelGeneral" for="">Skills <i>(Select up to 5)</i></label>
+          <div class="skillContainer">
+            <div *ngFor="let skill of skillClass" [ngClass]="skill.class" (click)="selectSkill(skill.id)">
+              {{skill.skill}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttonContainer">
+      <button class="redButton" (click)="updateProfile()">Save</button>
+      <button class="blackButton">Back</button>
+    </div>
+  </div>
+</div>
+

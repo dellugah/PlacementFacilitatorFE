@@ -25,9 +25,15 @@ export class StudentProfileComponent implements OnInit{
               protected profile : ProfileService) { }
 
   async ngOnInit(){
-    const loginData = await this.connection.getLogIn();
+    const loginData = await this.connection.getProfile();
     this.profile.profile = new BehaviorSubject<ProfileDTO>(loginData as ProfileDTO);
     this.profile$ = this.profile.profile;
+    this.profileStyle();
+  }
+
+  private profileStyle(){
+    const mainContainer = document.querySelector('.mainContainer') as HTMLElement;
+    mainContainer.style.background = 'linear-gradient(to bottom, #ffd1d1, #ffffff 20%)';
   }
 
 }
