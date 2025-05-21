@@ -44,7 +44,7 @@ export class ConnectionService {
   }
 
   // private baseUrl = 'http://localhost:8080/api/';
-  private baseUrl =  'http://placementfacilitator-production.up.railway.app/api/';
+  private baseUrl =  'https://placementfacilitator-production.up.railway.app/api/';
 
   constructor(private http: HttpClient) {
     window.addEventListener('storage', (e) => {
