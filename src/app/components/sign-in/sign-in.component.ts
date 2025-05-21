@@ -50,11 +50,12 @@ export class SignInComponent{
         accountType: this.loginForm.get('accountType')?.value
       })
 
-      const session = await this.connection.postConnection(data, 'auth/signup') as { token: string; homePage: string; expiresIn: number };
-      console.log(session);
+      const session = await this.connection.postConnection(data, 'auth/signup') as
+        { token: string; homePage: string; expiresIn: number };
       this.connection.setToken(session.token);
       this.connection.setExpiresIn(session.expiresIn);
       this.connection.setHomePage(session.homePage);
+      console.log(this.connection.getHomePage());
 
       await this.router.navigate([this.connection.getHomePage()]);
     }

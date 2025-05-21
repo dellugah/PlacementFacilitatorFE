@@ -21,7 +21,7 @@ export class StudentProfileComponent implements OnInit{
 
   profile$: BehaviorSubject<ProfileDTO> = new BehaviorSubject<ProfileDTO>(new ProfileDTO());
 
-  constructor(private connection : ConnectionService,
+  constructor(protected connection : ConnectionService,
               protected profile : ProfileService) { }
 
   async ngOnInit(){

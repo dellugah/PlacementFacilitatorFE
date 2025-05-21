@@ -44,15 +44,26 @@ export class ConnectionService {
   }
 
   // private baseUrl = 'http://localhost:8080/api/';
-  private baseUrl =  'https://placementfacilitator-production.up.railway.app/api/';
+  private baseUrl =  'http://placementfacilitator-production.up.railway.app/api/';
 
   constructor(private http: HttpClient) {
-    // this.resetHeaders();
+    window.addEventListener('storage', (e) => {
+      console.log('Storage changed:', {
+        key: e.key,
+        oldValue: e.oldValue,
+        newValue: e.newValue
+      });
+    });
+  }
+  private clearSessionData(): void {
+    sessionStorage.clear();
+    console.log('Session storage cleared:', {
+      token: this.getToken(),
+      homePage: this.getHomePage(),
+      expiresIn: this.getExpiresIn()
+    });
   }
 
-  // public resetHeaders() {
-  //   this.headers = new HttpHeaders().set('Content-Type', 'application/json');
-  // }
 
   private get headers(): HttpHeaders {
     const tokenValue = this.getToken() ? `Bearer ${this.getToken()}` : '';
@@ -66,15 +77,25 @@ export class ConnectionService {
     try {
       const response = await firstValueFrom(
         this.http.post(this.baseUrl + endpoint, data, {
-          headers: this.headers
+          headers: this.headers,
+          observe: 'response'
         })
       );
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.error('Error:', error);
-      return {};
+
+      if (response.status === 200 && response.body) {
+        return response.body;
+      } else {
+        this.clearSessionData();
+        throw new Error('Invalid response received');
+      }
+    } catch (error: any) {
+      // Handle HTTP errors (like 400)
+      this.clearSessionData();
+
+      // Rethrow the error instead of returning empty object
+      throw error;
     }
+
   }
 
   public async getConnection(endpoint: string) {
@@ -99,12 +120,17 @@ export class ConnectionService {
       );
       // Return the actual array from the Zone.js wrapper
       return (response as any).__zone_symbol__value || response;
-    } catch (error) {
-      console.error('Error accessing endpoint:', error);
-      return [] as T; // Return empty array instead of empty object
+    } catch (error: any) {
+      console.error('Connection error:', {
+        status: error?.status,
+        message: error?.message,
+        headers: this.headers.keys(),
+        tokenPresent: !!this.getToken()
+      });
+      // Don't return empty object on error, throw or return error details
+      throw error;
     }
   }
-
 
   public async getProfile() {
     try {
@@ -117,5 +143,9 @@ export class ConnectionService {
       console.error('Error:', error);
       return {};
     }
+  }
+
+  public async logout() {
+    this.clearSessionData();
   }
 }

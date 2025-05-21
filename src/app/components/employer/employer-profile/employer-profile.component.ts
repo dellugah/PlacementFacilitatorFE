@@ -35,5 +35,4 @@ export class EmployerProfileComponent implements OnInit {
     const mainContainer = document.querySelector('.mainContainer') as HTMLElement;
     mainContainer.style.background = 'linear-gradient(to bottom, #f1f8ff, #ffffff 20%)';
   }
-
 }

@@ -37,13 +37,20 @@ export class HomePageComponent implements OnInit{
       password: this.loginForm.get('password')?.value
     })
     //TODO: CHANGE TOKEN HANDLING SO IT IS NOT HANDLED ON THE CLIENT SIDE
-    let session = await this.connection.postConnection(data, 'auth/login') as { token: string; homePage: string; expiresIn: number }
+    try{
+      let session = await this.connection.postConnection(data, 'auth/login') as {
+        token: string;
+        homePage: string;
+        expiresIn: number
+      }
+      this.connection.setToken(session.token);
+      this.connection.setExpiresIn(session.expiresIn);
+      this.connection.setHomePage(session.homePage);
+      await this.router.navigate([this.connection.getHomePage()]);
 
-    this.connection.setToken(session.token);
-    this.connection.setExpiresIn(session.expiresIn);
-    this.connection.setHomePage(session.homePage);
-
-    await this.router.navigate([this.connection.getHomePage()]);
+    }catch(e){
+      console.log(e);
+    }
   }
 
   private profileStyle(){
