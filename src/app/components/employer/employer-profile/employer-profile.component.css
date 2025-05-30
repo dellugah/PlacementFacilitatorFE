@@ -6,11 +6,7 @@
   min-height: 8em;
   max-height: 10em;
 }
-.employer-router{
-  display: flex;
-  justify-content: center;
-  align-items: center; /* viewport height */
-}
+
 
 .contentArea{
   display: grid;

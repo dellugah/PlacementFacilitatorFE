@@ -1,9 +1,28 @@
-<p>placement-offers works!</p>
-
-<div *ngFor="let offers of pendingOffers">
-  <h2>{{offers.positionName}}</h2>
-  <p>{{offers.positionDescription}}</p>
-  <p>{{offers.requiredSkills}}</p>
-  <button>Accept</button>
-  <button>Decline</button>
+<div class="child-router">
+  <div *ngIf="pendingOffers.length > 0; else noStuds">
+    <div *ngFor="let offers of pendingOffers" class="studentProfileCard">
+      <h2>{{offers.positionName}}</h2>
+      <div class="division"></div>
+      <h3>Description</h3>
+      <p>{{offers.positionDescription}}</p>
+      <div class="division"></div>
+      <h3>Required Skills</h3>
+      <div class="skillTags">
+        <div *ngFor="let skill of offers.requiredSkills" class="skill-tag">{{ skill }}</div>
+      </div>
+      <div class="division"></div>
+      <div>
+        <button class="option-button" (click)="acceptPlacement(offers)">Accept</button>
+        <button class="option-button delete">Decline</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #noStuds>
+    <div class="studentProfileCard" id="warning">
+      <h2>Sorry</h2>
+      <h2><span id="message">you have no placement offers at the moment.</span></h2>
+    </div>
+  </ng-template>
 </div>
+
+

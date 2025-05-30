@@ -229,6 +229,12 @@ h2{
   gap: 0.5rem;
 }
 
+.child-router{
+  display: flex;
+  justify-content: center;
+  align-items: center; /* viewport height */
+}
+
 .skill-tag {
   font-size: 1.5vh;
   padding: 0.2em 1em;

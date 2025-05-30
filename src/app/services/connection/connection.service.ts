@@ -85,13 +85,12 @@ export class ConnectionService {
       if (response.status === 200 && response.body) {
         return response.body;
       } else {
-        this.clearSessionData();
         throw new Error('Invalid response received');
       }
     } catch (error: any) {
       // Handle HTTP errors (like 400)
       // Rethrow the error instead of returning empty object
-      throw error;
+      throw new Error('Invalid response received');
     }
 
   }
