@@ -25,7 +25,8 @@ export class SignInComponent{
     lastName: new FormControl('', [Validators.maxLength(10)]),
     companyName: new FormControl('', [Validators.maxLength(15)]),
     email: new FormControl('', [Validators.required]),
-    accountType: new FormControl('', [Validators.required])
+    accountType: new FormControl('', [Validators.required]),
+    nationality: new FormControl('', [Validators.required]),
   })
 
   constructor(protected connection : ConnectionService,
@@ -33,7 +34,9 @@ export class SignInComponent{
   }
 
   async register(){
-
+    if (this.loginForm.get('accountType')?.value === 'EMPLOYER') {
+      this.loginForm.get('nationality')?.setValue('CA');
+    }
     if(this.loginForm.invalid){
       //TODO: IMPLEMENT BETTER ERROR HANDLING
       console.log('invalid');
@@ -45,10 +48,19 @@ export class SignInComponent{
         password: this.loginForm.get('password')?.value,
         firstName: this.loginForm.get('firstName')?.value,
         lastName: this.loginForm.get('lastName')?.value,
+        domestic: (() => {
+            let nationality = this.loginForm.get('nationality')?.value;
+            let resident: boolean = false;
+            if (nationality === 'CA') {
+              resident = true;
+          }
+          return resident;
+        })(),
         companyName: this.loginForm.get('companyName')?.value,
         email: this.loginForm.get('email')?.value,
         accountType: this.loginForm.get('accountType')?.value
       })
+      console.log(data);
 
       const session = await this.connection.postConnection(data, 'auth/signup') as
         { token: string; homePage: string; expiresIn: number };

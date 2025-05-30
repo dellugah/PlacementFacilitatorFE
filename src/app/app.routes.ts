@@ -11,6 +11,7 @@ import {
   PlacementStudentListComponent
 } from './components/employer/placement-student-list/placement-student-list.component';
 import {EditProfileComponent} from './components/student-profile/edit-profile/edit-profile.component';
+import {PlacementOffersComponent} from './components/student-profile/placement-offers/placement-offers.component';
 
 
 export const routes: Routes = [
@@ -38,6 +39,7 @@ export const routes: Routes = [
     component: StudentProfileComponent,
     children: [
       { path: 'edit', component: EditProfileComponent },
+      {path: 'offers', component: PlacementOffersComponent},
     ]
   }
 ];

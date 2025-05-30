@@ -47,4 +47,14 @@ export class PlacementStudentListComponent implements OnInit{
     })
   }
 
+  protected async offerPlacement(studentId: number | undefined, placementId: number | undefined){
+    if(studentId === undefined || placementId === undefined){
+      return;
+    }
+    await this.connection.postConnection({
+      studentId : studentId,
+      placementId : placementId
+    }, 'employer/offer-placement');
+  }
+
 }

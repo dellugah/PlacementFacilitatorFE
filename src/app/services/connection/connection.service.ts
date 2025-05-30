@@ -90,8 +90,6 @@ export class ConnectionService {
       }
     } catch (error: any) {
       // Handle HTTP errors (like 400)
-      this.clearSessionData();
-
       // Rethrow the error instead of returning empty object
       throw error;
     }

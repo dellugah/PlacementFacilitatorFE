@@ -57,12 +57,15 @@ export class ProfileDTO {
     public linkTwo?: string,
     public skills: TechnicalSkill[] = [],
     public domestic?: boolean,
+    ///TODO: Add placement offers & acceptedPlacement variables
     public profilePhoto?: string,
     public placements?: PlacementDTO[],
     public companyName?: string,
     public firstName?: string,
     public lastName?: string,
     public visible: boolean = false,
+    public pendingOffers?: PlacementDTO[],
+    public acceptedPlacement?: PlacementDTO,
     public file?: string
   ) {}
 }
