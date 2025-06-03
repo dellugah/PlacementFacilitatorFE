@@ -22,23 +22,35 @@ export class PlacementOffersComponent implements OnInit{
               router : Router, protected connection : ConnectionService) { }
 
   ngOnInit(){
-    const profileValue = this.profile.profile.getValue();
-    console.log(profileValue);
-    if (profileValue.pendingOffers) {
-      profileValue.pendingOffers.forEach(placement => {
-        console.log(placement);
-        this.pendingOffers.push(placement);
-      });
-    }
+    this.reloadProfile()
   }
 
   public async acceptPlacement(placement : PlacementDTO){
-    const response = this.connection.postConnection(placement.placementId, "student/accept-placement")
-    response.then(
+    await this.connection.postConnection(placement.placementId, "student/accept-placement").then(
       (data => {
         this.profile.profile = new BehaviorSubject<ProfileDTO>( data as ProfileDTO);
+        this.reloadProfile()
       })
     )
+  }
+
+  public async rejectPlacement(placement : PlacementDTO){
+    await this.connection.postConnection(placement.placementId, "student/reject-placement").then(
+      (data => {
+        this.profile.profile = new BehaviorSubject<ProfileDTO>( data as ProfileDTO);
+        this.reloadProfile()
+      })
+    )
+  }
+
+  private reloadProfile(){
+    const profileValue = this.profile.profile.getValue();
+    this.pendingOffers = [];
+    if (profileValue.pendingOffers) {
+      profileValue.pendingOffers.forEach(placement => {
+        this.pendingOffers.push(placement);
+      });
+    }
   }
 
 }

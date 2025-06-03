@@ -13,15 +13,29 @@
       <div class="division"></div>
       <div>
         <button class="option-button" (click)="acceptPlacement(offers)">Accept</button>
-        <button class="option-button delete">Decline</button>
+        <button class="option-button delete" (click)="rejectPlacement(offers)">Decline</button>
       </div>
     </div>
   </div>
   <ng-template #noStuds>
-    <div class="studentProfileCard" id="warning">
+    <div class="studentProfileCard" id="warning" *ngIf="profile.profile.value.acceptedPlacement == null; else employed">
       <h2>Sorry</h2>
       <h2><span id="message">you have no placement offers at the moment.</span></h2>
     </div>
+
+    <ng-template #employed>
+      <div class="studentProfileCard" id="warning">
+        <h1>Current Placement:</h1>
+        <h2>{{profile.profile.value.acceptedPlacement?.positionName}}</h2>
+        <div class="division"></div>
+        <h3>Description</h3>
+        <h2><span id="message">{{profile.profile.value.acceptedPlacement?.positionDescription}}</span></h2>
+        <h3>Required Skills</h3>
+        <div class="skillTags">
+          <div *ngFor="let skill of profile.profile.value.acceptedPlacement?.requiredSkills" class="skill-tag">{{ skill }}</div>
+        </div>
+      </div>
+    </ng-template>
   </ng-template>
 </div>
 
