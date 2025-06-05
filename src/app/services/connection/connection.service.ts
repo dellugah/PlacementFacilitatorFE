@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 interface TokenData {
   token: string;
@@ -88,8 +88,6 @@ export class ConnectionService {
         throw new Error('Invalid response received');
       }
     } catch (error: any) {
-      // Handle HTTP errors (like 400)
-      // Rethrow the error instead of returning empty object
       throw new Error('Invalid response received');
     }
 

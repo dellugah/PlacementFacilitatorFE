@@ -1,11 +1,12 @@
 <form [formGroup]="loginForm" class="signInContainer">
   <h1>Sign <span class="red">In</span></h1>
     <div class="inputContainer">
-      <label class="labelGeneral" for="accountType">Account Type</label>
+      <label class="labelGeneral" for="accountType">Account Type </label>
       <select class="inputGeneral"
               id="accountType"
               formControlName="accountType"
-              required>
+              required
+              #accountType>
         <option value="">Select account type</option>
         <option value="STUDENT">Student</option>
         <option value="EMPLOYER">Employer</option>
@@ -15,40 +16,45 @@
   <div *ngIf="loginForm.get('accountType')?.value !== ''">
     <div class="inputContainer" *ngIf="loginForm.get('accountType')?.value === 'EMPLOYER'">
       <div class="inputContainer">
-        <label class="labelGeneral" for="companyName">Company Name</label>
+        <label class="labelGeneral" for="companyName">Company Name <span class="red">{{companyNameMessage}}</span></label>
         <input class="inputGeneral"
                id="companyName"
                type="text"
                formControlName="companyName"
-               maxlength="15">
+               maxlength="15"
+               #companyName
+        >
       </div>
     </div>
 
     <div class="inputContainer" *ngIf="loginForm.get('accountType')?.value === 'STUDENT'">
       <div class="inputContainer">
-        <label class="labelGeneral" for="firstName">First Name</label>
+        <label class="labelGeneral" for="firstName">First Name <span class="red">{{firstNameMessage}}</span></label>
         <input class="inputGeneral"
                id="firstName"
                type="text"
                formControlName="firstName"
-               maxlength="10">
+               maxlength="10"
+               #firstName>
       </div>
 
       <div class="inputContainer">
-        <label class="labelGeneral" for="lastName">Last Name</label>
+        <label class="labelGeneral" for="lastName">Last Name <span class="red">{{lastNameMessage}}</span></label>
         <input class="inputGeneral"
                id="lastName"
                type="text"
                formControlName="lastName"
-               maxlength="10">
+               maxlength="10"
+               #lastName>
       </div>
 
       <div class="inputContainer">
-        <label class="labelGeneral" for="nationality">Nationality</label>
+        <label class="labelGeneral" for="nationality">Nationality <span class="red">{{nationalityMessage}}</span></label>
         <select class="inputGeneral"
                 id="nationality"
                 formControlName="nationality"
-                required>
+                required
+                #nationality>
           <option value="CA">Canadian</option>
           <option value="IN">International</option>
         </select>
@@ -57,35 +63,38 @@
     </div>
 
     <div class="inputContainer">
-      <label class="labelGeneral" for="username">Username</label>
+      <label class="labelGeneral" for="username">Username <span class="red">{{userNameMessage}}</span></label>
       <input class="inputGeneral"
              id="username"
              type="text"
              formControlName="username"
              autocomplete="username"
              required
-             minlength="8">
+             minlength="8"
+             #username>
     </div>
 
     <div class="inputContainer">
-      <label class="labelGeneral" for="password">Password</label>
+      <label class="labelGeneral" for="password">Password <span class="red">{{passwordMessage}}</span></label>
       <input class="inputGeneral"
              id="password"
              type="password"
              formControlName="password"
              autocomplete="new-password"
              required
-             minlength="8">
+             minlength="8"
+             #password>
     </div>
 
     <div class="inputContainer">
-      <label class="labelGeneral" for="email">Email</label>
+      <label class="labelGeneral" for="email">Email <span class="red">{{emailMessage}}</span></label>
       <input class="inputGeneral"
              id="email"
              type="email"
              formControlName="email"
              autocomplete="email"
-             required>
+             required
+             #email>
     </div>
 </div>
   <div class="buttonContainer">

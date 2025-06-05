@@ -1,18 +1,20 @@
 <form [formGroup]="loginForm" class="formContainer">
   <div class="flex-column">
     <h1>Log <span class="red">In</span></h1>
+    <span class="red"><p>{{infoMessage}}</p></span>
     <div class="inputContainer">
-      <label class="labelGeneral" for="username">Username</label>
+      <label class="labelGeneral" for="username">Username <span class="red">{{userNameMessage}}</span></label>
       <input class="inputGeneral"
              id="username"
              type="text"
              formControlName="username"
              autocomplete="username"
-             required>
+             required
+             #username>
     </div>
 
     <div class="inputContainer">
-      <label class="labelGeneral" for="password">Password</label>
+      <label class="labelGeneral" for="password">Password <span class="red">{{passwordMessage}}</span></label>
       <input class="inputGeneral"
              id="password"
              type="password"
@@ -20,7 +22,8 @@
              autocomplete="current-password"
              required
              minlength="8"
-             aria-describedby="password-constraints">
+             aria-describedby="password-constraints"
+             #password>
     </div>
     <div class="buttonContainer">
       <button class="redButton" (click)="login()">Log in</button>
