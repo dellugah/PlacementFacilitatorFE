@@ -86,6 +86,11 @@ export class SignInComponent{
   async register(){
     if (this.loginForm.get('accountType')?.value === 'EMPLOYER') {
       this.loginForm.get('nationality')?.setValue('CA');
+      this.loginForm.get('firstName')?.setValue('noName');
+      this.loginForm.get('lastName')?.setValue('noName');
+    }
+    if (this.loginForm.get('accountType')?.value === 'STUDENT') {
+      this.loginForm.get('companyName')?.setValue('noComp');
     }
     if(this.loginForm.invalid){
       //TODO: IMPLEMENT BETTER ERROR HANDLING

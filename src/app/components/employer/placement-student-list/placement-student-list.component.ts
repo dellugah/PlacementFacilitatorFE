@@ -23,8 +23,11 @@ import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
  * between route parameters and profile updates.
  */
 export class PlacementStudentListComponent implements OnInit, OnDestroy {
+  // BehaviorSubject to manage the current placement state
   private placementSubject = new BehaviorSubject<PlacementDTO>(new PlacementDTO());
+  // Observable to expose the placement data to the template
   placement$ = this.placementSubject.asObservable();
+  // Subject for managing component lifecycle and cleanup
   private destroy$ = new Subject<void>();
 
   /**
@@ -47,17 +50,23 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
    * of the placement and its potential candidates.
    */
   ngOnInit() {
-    // Subscribe to both route params and profile changes
+    // Combine latest values from route parameters and profile updates
     combineLatest([
+      // Extract and parse placement data from route query parameters
       this.route.queryParams.pipe(
+        // Only proceed if 'data' parameter exists
         filter(params => !!params['data']),
+        // Parse JSON string into PlacementDTO object
         map(params => JSON.parse(params['data']) as PlacementDTO)
       ),
+      // Get current profile data
       this.profile.profile
     ]).pipe(
+      // Unsubscribe when component is destroyed
       takeUntil(this.destroy$),
+      // Combine route placement with profile data
       map(([routePlacement, profile]) => {
-        // Get the most up-to-date placement data
+        // Find matching placement in profile or use route placement as fallback
         const currentPlacement = profile.placements?.find(p =>
           p.placementId === routePlacement.placementId
         ) || routePlacement;
@@ -66,7 +75,9 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
         return currentPlacement;
       })
     ).subscribe(placement => {
+      // Update placement subject with combined data
       this.placementSubject.next(placement);
+      // Trigger change detection
       this.cdr.detectChanges();
     });
   }
@@ -78,21 +89,28 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
    * @param studentId - The ID of the student to offer the placement to
    */
   protected async offerPlacement(studentId: number | undefined) {
+    // Validate student ID
     if (!studentId) return;
 
+    // Get current placement ID
     const placementId = this.placementSubject.getValue().placementId;
+    // Validate placement ID
     if (!placementId) return;
 
     try {
+      // Send offer placement request to server
       const response = await this.connection.postConnection({
         studentId,
         placementId
       }, 'employer/offer-placement');
 
+      // Handle successful response
       if (response && typeof response === 'object') {
+        // Update profile with new data
         const profileData = response as ProfileDTO;
         this.profile.profile.next(profileData);
 
+        // Find and update the current placement
         const updatedPlacement = profileData.placements?.find(p =>
           p.placementId === placementId
         );
@@ -113,14 +131,18 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
    * @param studentId - The ID of the student to revoke the placement from
    */
   protected async revokePlacement(studentId: number | undefined) {
+    // Validate student ID
     if (!studentId) return;
 
+    // Get current placement ID
     const placementId = this.placementSubject.getValue().placementId;
+    // Validate placement ID
     if (!placementId) return;
 
     try {
       console.log('Revoking placement for student:', studentId);
 
+      // Send revoke placement request to server
       const response = await this.connection.postConnection({
         studentId,
         placementId
@@ -128,22 +150,22 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
 
       console.log('Revoke response:', response);
 
+      // Validate response format
       if (!response || typeof response !== 'object') {
         throw new Error('Invalid response data');
       }
 
+      // Update profile with new data
       const profileData = response as ProfileDTO;
-
-      // Update the profile first
       this.profile.profile.next(profileData);
 
-      // Get the latest placement data
+      // Find updated placement in profile
       const updatedPlacement = profileData.placements?.find(p =>
         p.placementId === placementId
       );
 
+      // Update placement and filter out revoked student
       if (updatedPlacement) {
-        // Update the placement with the latest data
         this.placementSubject.next({
           ...updatedPlacement,
           potentialCandidates: updatedPlacement.potentialCandidates?.filter(
@@ -152,6 +174,7 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
         });
       }
 
+      // Trigger change detection
       this.cdr.detectChanges();
 
     } catch (error) {
