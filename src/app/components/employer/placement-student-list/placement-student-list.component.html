@@ -1,5 +1,6 @@
 <div class="rowLayout">
-  <div class="studentProfileCard" *ngFor="let student of placement.potentialCandidates">
+  <ng-container *ngIf="placement$ | async as placement">
+  <div class="studentProfileCard" *ngFor="let student of (placement$ | async)?.potentialCandidates">
     <!-- Profile Header with Photo -->
     <div class="profileHeader">
       <div class="header-info">
@@ -50,9 +51,10 @@
     <div class="division"></div>
     <div>
       <button class="option-button">Contact</button>
-      <button class="option-button" (click)="offerPlacement(student.profileId, placement.placementId)">Offer Placement</button>
-      <button class="option-button delete">Remove</button>
+      <button class="option-button" (click)="offerPlacement(student.profileId)">Offer Placement</button>
+      <button class="option-button delete"(click)="revokePlacement(student.profileId)">Remove</button>
     </div>
   </div>
+  </ng-container>
 </div>
 

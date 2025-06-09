@@ -67,7 +67,6 @@ export class ConnectionService {
 
   private get headers(): HttpHeaders {
     const tokenValue = this.getToken() ? `Bearer ${this.getToken()}` : '';
-    console.log(tokenValue);
     return new HttpHeaders()
       .set('Authorization', tokenValue)
       .set('Content-Type', 'application/json')

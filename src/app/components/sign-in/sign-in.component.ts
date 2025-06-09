@@ -16,8 +16,15 @@ import {Router, RouterLink} from '@angular/router';
   standalone: true,
   styleUrl: './sign-in.component.css'
 })
+/**
+ * Component responsible for handling user sign-in/registration functionality.
+ * Manages form validation and user registration process.
+ */
 export class SignInComponent{
 
+  /**
+   * Form group containing user registration fields with validation rules
+   */
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.minLength(8)]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -27,11 +34,14 @@ export class SignInComponent{
       Validators.minLength(3), Validators.required]),
     companyName: new FormControl('', [Validators.maxLength(15),
       Validators.minLength(3), Validators.required]),
-    email: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.pattern(/^[^@]*@[^@]*\.com/i)]),
     accountType: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
   })
 
+  /**
+   * References to form input elements for styling purposes
+   */
   @ViewChild('accountType') styleAccountType!: ElementRef;
   @ViewChild('nationality') styleNationality!: ElementRef;
   @ViewChild('email') styleEmail!: ElementRef;
@@ -41,9 +51,15 @@ export class SignInComponent{
   @ViewChild('username') styleUsername!: ElementRef;
   @ViewChild('password') StylePassword!: ElementRef;
 
+  /**
+   * Color constants for form validation feedback
+   */
   redText = '#ffe0e0';
   blueText = '#f6f9ff';
 
+  /**
+   * Validation message strings for form fields
+   */
   userNameMessage = "";
   passwordMessage = "";
   companyNameMessage = "";
@@ -52,10 +68,21 @@ export class SignInComponent{
   lastNameMessage = "";
   nationalityMessage = "";
 
+  /**
+   * Initializes the component with required services
+   * @param connection Service for handling API connections
+   * @param router Angular router for navigation
+   */
   constructor(protected connection : ConnectionService,
               private router : Router) {
   }
 
+  /**
+   * Handles the user registration process
+   * Validates form inputs and submits data to the server
+   * Updates UI with validation feedback
+   * Navigates to appropriate page on successful registration
+   */
   async register(){
     if (this.loginForm.get('accountType')?.value === 'EMPLOYER') {
       this.loginForm.get('nationality')?.setValue('CA');
@@ -73,7 +100,10 @@ export class SignInComponent{
         }
       }
 
-      if (this.loginForm.get('email')?.invalid) {
+      if (this.loginForm.get('email')?.errors?.['pattern']) {
+        this.emailMessage = '* Invalid e-mail';
+      }
+      else if (this.loginForm.get('email')?.invalid) {
         this.emailMessage = "*";
         this.styleEmail.nativeElement.style.backgroundColor = this.redText;
       } else{

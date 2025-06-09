@@ -1,60 +1,171 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {ActivatedRoute} from '@angular/router';
 import {ConnectionService} from '../../../services/connection/connection.service';
 import {ProfileService} from '../../../services/profileServices/profile.service';
-import {BehaviorSubject} from 'rxjs';
-import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {BehaviorSubject, combineLatest, filter, map, Subject, switchMap, takeUntil, tap} from 'rxjs';
+import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-placement-student-list',
   imports: [
     NgForOf,
     NgIf,
-    NgOptimizedImage
+    NgOptimizedImage,
+    AsyncPipe
   ],
   templateUrl: './placement-student-list.component.html',
   styleUrl: './placement-student-list.component.css'
 })
-export class PlacementStudentListComponent implements OnInit{
+/**
+ * Component responsible for displaying and managing a list of students for a specific placement.
+ * Handles offering and revoking placements to students, and maintains synchronized state
+ * between route parameters and profile updates.
+ */
+export class PlacementStudentListComponent implements OnInit, OnDestroy {
+  private placementSubject = new BehaviorSubject<PlacementDTO>(new PlacementDTO());
+  placement$ = this.placementSubject.asObservable();
+  private destroy$ = new Subject<void>();
 
-  constructor(private route: ActivatedRoute,
-              protected connection : ConnectionService,
-              protected profile : ProfileService,) { }
+  /**
+   * Initializes the component with required services.
+   * @param route - For accessing route parameters
+   * @param connection - Service for making HTTP requests
+   * @param profile - Service for managing profile data
+   * @param cdr - For manual change detection
+   */
+  constructor(
+    private route: ActivatedRoute,
+    protected connection: ConnectionService,
+    protected profile: ProfileService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
-  placement : PlacementDTO = new PlacementDTO();
-  possibleStudents: ProfileDTO[] = [];
+  /**
+   * Initializes the component by subscribing to route parameters and profile updates.
+   * Combines the latest data from both sources to maintain an up-to-date view
+   * of the placement and its potential candidates.
+   */
+  ngOnInit() {
+    // Subscribe to both route params and profile changes
+    combineLatest([
+      this.route.queryParams.pipe(
+        filter(params => !!params['data']),
+        map(params => JSON.parse(params['data']) as PlacementDTO)
+      ),
+      this.profile.profile
+    ]).pipe(
+      takeUntil(this.destroy$),
+      map(([routePlacement, profile]) => {
+        // Get the most up-to-date placement data
+        const currentPlacement = profile.placements?.find(p =>
+          p.placementId === routePlacement.placementId
+        ) || routePlacement;
 
-  ngOnInit(){
-    this.route.queryParams.subscribe(async params => {
-      if (params['data']) {
-        this.placement = JSON.parse(params['data']) as PlacementDTO;
-        this.possibleStudents = this.placement.potentialCandidates;
-        this.possibleStudents.forEach(student => {
-        })
-      }
-      const updateProfile = await this.connection.getProfile();
-      this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
-      this.selectPlacement()
+        console.log('Combined placement data:', currentPlacement);
+        return currentPlacement;
+      })
+    ).subscribe(placement => {
+      this.placementSubject.next(placement);
+      this.cdr.detectChanges();
     });
   }
 
-  private selectPlacement(){
-    this.profile.placement.forEach(placement => {
-      if(placement.placementId === this.placement.placementId){
-        this.placement = placement;
+  /**
+   * Offers a placement to a specific student.
+   * Makes an API call to create the connection between student and placement,
+   * then updates the local state with the response.
+   * @param studentId - The ID of the student to offer the placement to
+   */
+  protected async offerPlacement(studentId: number | undefined) {
+    if (!studentId) return;
+
+    const placementId = this.placementSubject.getValue().placementId;
+    if (!placementId) return;
+
+    try {
+      const response = await this.connection.postConnection({
+        studentId,
+        placementId
+      }, 'employer/offer-placement');
+
+      if (response && typeof response === 'object') {
+        const profileData = response as ProfileDTO;
+        this.profile.profile.next(profileData);
+
+        const updatedPlacement = profileData.placements?.find(p =>
+          p.placementId === placementId
+        );
+        if (updatedPlacement) {
+          this.placementSubject.next(updatedPlacement);
+        }
       }
-    })
-  }
-
-  protected async offerPlacement(studentId: number | undefined, placementId: number | undefined){
-    if(studentId === undefined || placementId === undefined){
-      return;
+    } catch (error) {
+      console.error('Error offering placement:', error);
     }
-    await this.connection.postConnection({
-      studentId : studentId,
-      placementId : placementId
-    }, 'employer/offer-placement');
   }
 
+
+  /**
+   * Revokes a placement offer from a specific student.
+   * Sends a request to remove the connection between student and placement,
+   * then updates the local state to reflect the change.
+   * @param studentId - The ID of the student to revoke the placement from
+   */
+  protected async revokePlacement(studentId: number | undefined) {
+    if (!studentId) return;
+
+    const placementId = this.placementSubject.getValue().placementId;
+    if (!placementId) return;
+
+    try {
+      console.log('Revoking placement for student:', studentId);
+
+      const response = await this.connection.postConnection({
+        studentId,
+        placementId
+      }, 'employer/revoke-student');
+
+      console.log('Revoke response:', response);
+
+      if (!response || typeof response !== 'object') {
+        throw new Error('Invalid response data');
+      }
+
+      const profileData = response as ProfileDTO;
+
+      // Update the profile first
+      this.profile.profile.next(profileData);
+
+      // Get the latest placement data
+      const updatedPlacement = profileData.placements?.find(p =>
+        p.placementId === placementId
+      );
+
+      if (updatedPlacement) {
+        // Update the placement with the latest data
+        this.placementSubject.next({
+          ...updatedPlacement,
+          potentialCandidates: updatedPlacement.potentialCandidates?.filter(
+            candidate => candidate.profileId !== studentId
+          )
+        });
+      }
+
+      this.cdr.detectChanges();
+
+    } catch (error) {
+      console.error('Error revoking placement:', error);
+    }
+  }
+
+  /**
+   * Cleanup method that completes all subscriptions when the component is destroyed
+   * to prevent memory leaks.
+   */
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
+
