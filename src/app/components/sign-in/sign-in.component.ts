@@ -93,7 +93,6 @@ export class SignInComponent{
       this.loginForm.get('companyName')?.setValue('noComp');
     }
     if(this.loginForm.invalid){
-      //TODO: IMPLEMENT BETTER ERROR HANDLING
 
       if (this.loginForm.get('nationality')?.invalid && this.styleNationality != undefined) {
         this.nationalityMessage = "*";

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {ConnectionService} from '../../../services/connection/connection.service';
 import {ProfileService} from '../../../services/profileServices/profile.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-match-student',
@@ -57,6 +58,7 @@ export class MatchStudentComponent implements OnInit {
       this.index++;
     }
   }
+
   public previousStudent(){
     if(this.index > 0){
       this.index--;
@@ -100,7 +102,22 @@ export class MatchStudentComponent implements OnInit {
     }
   }
 
-  async placementStudentList(placement: PlacementDTO){
+  async placementStudentList(currentPlacement: PlacementDTO) {
+    // Update profile
+    const updateProfile = await this.connection.getProfile();
+    this.profile.profile = new BehaviorSubject<ProfileDTO>(updateProfile as ProfileDTO);
+
+    // Find matching placement
+    const placement = this.profile.getPlacements()?.find(
+      p => p.placementId === currentPlacement.placementId
+    );
+
+    if (!placement) {
+      alert('An error occurred, please try again later. If the problem persists, please contact the developer.');
+      return;
+    }
+
+    // Navigate to placement student list
     await this.router.navigate(['employer/placement-student-list'], {
       queryParams: { data: JSON.stringify(placement) }
     });
