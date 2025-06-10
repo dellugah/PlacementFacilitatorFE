@@ -61,6 +61,15 @@ router-outlet{
   background-color: #f6f9ff;
 }
 
+.text-area{
+  height: 30vh;
+  width: 15em;
+  border-radius: 1em;
+  border: 1px none;
+  padding: 1em;
+  resize: none;
+}
+
 .labelGeneral{
   font-size: 1em;
 }
@@ -137,14 +146,20 @@ router-outlet{
   width: 35vh;
   height: 100%;
   border-radius: .5em;
-  border: 1px solid #cfcfcf;
+  border: 1px solid #c2e2ff;
   box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);
   transition: all .1s ease-in-out;
   align-items: center;
-  background: linear-gradient(to bottom, #f1f8ff, #ffffff 20%);
+  background: linear-gradient(to bottom, #c2e2ff, #ffffff 20%);
   gap: 1em;
   padding: 1.5rem;
   font-size: 1vh;
+}
+
+.studentProfileCard:hover{
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fcffff;
+  border-color: #009dff;
 }
 
 h3{

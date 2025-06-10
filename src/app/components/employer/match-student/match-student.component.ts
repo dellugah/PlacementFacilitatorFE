@@ -130,18 +130,22 @@ export class MatchStudentComponent implements OnInit {
   // Use these methods with (mouseenter) and (mouseleave) in template
   onNoOptionEnter() {
     this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #ffc5c5, #ffffff 50%)';
+    this.profileCard.nativeElement.style.borderColor = "#ffc5c5";
   }
 
   onNoOptionLeave() {
-    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #f1f8ff, #ffffff 20%)';
+    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom,#c2e2ff, #ffffff 20%)';
+    this.profileCard.nativeElement.style.borderColor = "#c2e2ff";
   }
 
   onYesOptionEnter() {
     this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #c5ffc5, #ffffff 50%)';
+    this.profileCard.nativeElement.style.borderColor = "#c5ffc5";
   }
 
   onYesOptionLeave() {
-    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #f1f8ff, #ffffff 20%)';
+    this.profileCard.nativeElement.style.background = 'linear-gradient(to bottom, #c2e2ff, #ffffff 20%)';
+    this.profileCard.nativeElement.style.borderColor = '#c2e2ff';
   }
 
 }

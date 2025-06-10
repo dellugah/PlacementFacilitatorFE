@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ConnectionService} from '../../../services/connection/connection.service';
 import {ProfileService} from '../../../services/profileServices/profile.service';
 import {BehaviorSubject, combineLatest, filter, map, Subject, switchMap, takeUntil, tap} from 'rxjs';
@@ -36,12 +36,14 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
    * @param connection - Service for making HTTP requests
    * @param profile - Service for managing profile data
    * @param cdr - For manual change detection
+   * @param router
    */
   constructor(
     private route: ActivatedRoute,
     protected connection: ConnectionService,
     protected profile: ProfileService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router : Router,
   ) {}
 
   /**
@@ -186,6 +188,13 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
    * Cleanup method that completes all subscriptions when the component is destroyed
    * to prevent memory leaks.
    */
+
+  protected async goToMatchingPage(){
+    let placement = this.placementSubject.getValue();
+    await this.router.navigate(['employer/matching'], {
+      queryParams: { data: JSON.stringify(placement) }
+    });
+  }
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();

@@ -1,60 +1,67 @@
 <div class="rowLayout">
-  <ng-container *ngIf="placement$ | async as placement">
-  <div class="studentProfileCard" *ngFor="let student of (placement$ | async)?.potentialCandidates">
-    <!-- Profile Header with Photo -->
-    <div class="profileHeader">
-      <div class="header-info">
-        <div class="profilePhoto">
-          <img ngSrc="/student.png" alt="Profile Photo" width="80" height="80">
+  <ng-container *ngIf="(placement$ | async)?.potentialCandidates?.length; else noStudents">
+    <div class="studentProfileCard" *ngFor="let student of (placement$ | async)?.potentialCandidates">
+      <!-- Profile Header with Photo -->
+      <div class="profileHeader">
+        <div class="header-info">
+          <div class="profilePhoto">
+            <img ngSrc="/student.png" alt="Profile Photo" width="80" height="80">
+          </div>
+          <div class="nameSection">
+            <h2>{{student.firstName}} {{ student.lastName }}</h2>
+            <span class="location-badge" *ngIf="student.domestic; else International"><i class="fas fa-link">Domestic</i></span>
+            <ng-template #International>
+              <span class="location-badge"><i class="fas fa-link">International</i></span>
+            </ng-template>
+          </div>
         </div>
-        <div class="nameSection">
-          <h2>{{student.firstName}} {{ student.lastName }}</h2>
-          <span class="location-badge" *ngIf="student.domestic; else International"><i class="fas fa-link">Domestic</i></span>
-          <ng-template #International>
-            <span class="location-badge"><i class="fas fa-link">International</i></span>
-          </ng-template>
+      </div>
+
+      <div class="division"></div>
+      <!-- Bio Section -->
+      <div class="bioSection">
+        <h3>Bio</h3>
+        <p>{{ student.bio }}</p>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="division"></div>
+      <div class="skillsSection">
+        <h3>Technical Skills</h3>
+        <div class="skillTags">
+          <span class="skill-tag" *ngFor="let skill of student.skills">{{ skill }}</span>
         </div>
       </div>
-    </div>
 
-    <div class="division"></div>
-    <!-- Bio Section -->
-    <div class="bioSection">
-      <h3>Bio</h3>
-      <p>{{ student.bio }}</p>
-    </div>
-
-    <!-- Skills Section -->
-    <div class="division"></div>
-    <div class="skillsSection">
-      <h3>Technical Skills</h3>
-      <div class="skillTags">
-        <span class="skill-tag" *ngFor="let skill of student.skills">{{ skill }}</span>
+      <!-- Contact Section -->
+      <div class="division"></div>
+      <div class="contactSection">
+        <div class="links">
+          <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+            <i class="fas fa-link">LinkedIn</i>
+          </a>
+          <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+            <i class="fas fa-link">Github</i>
+          </a>
+          <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+            <i class="fas fa-link">Resume</i>
+          </a>
+        </div>
+      </div>
+      <div class="division"></div>
+      <div>
+        <button class="option-button">Contact</button>
+        <button class="option-button" (click)="offerPlacement(student.profileId)">Offer Placement</button>
+        <button class="option-button delete"(click)="revokePlacement(student.profileId)">Remove</button>
       </div>
     </div>
-
-    <!-- Contact Section -->
-    <div class="division"></div>
-    <div class="contactSection">
-      <div class="links">
-        <a *ngIf="true" [href]="" target="_blank" class="link-tag">
-          <i class="fas fa-link">LinkedIn</i>
-        </a>
-        <a *ngIf="true" [href]="" target="_blank" class="link-tag">
-          <i class="fas fa-link">Github</i>
-        </a>
-        <a *ngIf="true" [href]="" target="_blank" class="link-tag">
-          <i class="fas fa-link">Resume</i>
-        </a>
-      </div>
-    </div>
-    <div class="division"></div>
-    <div>
-      <button class="option-button">Contact</button>
-      <button class="option-button" (click)="offerPlacement(student.profileId)">Offer Placement</button>
-      <button class="option-button delete"(click)="revokePlacement(student.profileId)">Remove</button>
-    </div>
-  </div>
   </ng-container>
+  <ng-template #noStudents>
+    <div class="studentProfileCard" id="warning">
+      <h2>So empty!</h2>
+      <h2><span id="message">Looking for potential candidates?</span></h2>
+      <button class="option-button" (click)="goToMatchingPage()">Match with students</button>
+    </div>
+  </ng-template>
 </div>
 
