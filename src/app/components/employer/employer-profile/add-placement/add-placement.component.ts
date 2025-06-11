@@ -1,26 +1,24 @@
 import {Component, OnInit} from '@angular/core';
-import {PlacementDTO, TechnicalSkill} from '../../../DTOs/ProfileDTO';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ConnectionService} from '../../../../services/connection/connection.service';
+import {Router, RouterLink} from '@angular/router';
+import {ProfileService} from '../../../../services/profileServices/profile.service';
+import {TechnicalSkill} from '../../../../DTOs/ProfileDTO';
 import {NgClass, NgForOf} from '@angular/common';
-import {ProfileService} from '../../../services/profileServices/profile.service';
-import {ConnectionService} from '../../../services/connection/connection.service';
 
 @Component({
-  selector: 'app-edit-placement',
+  selector: 'app-add-placement',
   imports: [
-    FormsModule,
-    NgForOf,
     ReactiveFormsModule,
+    RouterLink,
     NgClass,
-    RouterLink
+    NgForOf
   ],
-  templateUrl: './edit-placement.component.html',
-  styleUrl: './edit-placement.component.css'
+  templateUrl: './add-placement.component.html',
+  styleUrl: './add-placement.component.css'
 })
-export class EditPlacementComponent implements OnInit{
+export class AddPlacementComponent implements OnInit {
 
-  placement: PlacementDTO = new PlacementDTO();
   formGroup = new FormGroup({
     positionName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     positionDescription: new FormControl(),
@@ -28,27 +26,12 @@ export class EditPlacementComponent implements OnInit{
     requiredSkills: new FormControl<string[]>([])
   });
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              protected connection : ConnectionService,
-              protected profile : ProfileService) {}
+  constructor(private connection : ConnectionService,
+              private router : Router,
+              protected profile : ProfileService) { }
 
-  ngOnInit(){
+  ngOnInit(): void {
     this.initSkillList();
-    this.route.queryParams.subscribe(params => {
-      if (params['data']) {
-        this.placement = JSON.parse(params['data']) as PlacementDTO;
-      }
-    });
-
-    this.formGroup.patchValue({
-      positionName: this.placement.positionName,
-      positionDescription: this.placement.positionDescription,
-      positionsAvailable: this.placement.positionsAvailable + '',
-      requiredSkills: this.placement.requiredSkills
-    });
-
-
   }
 
   public skillClass: { skill: string, id: number, class : string }[] = [];
@@ -58,17 +41,17 @@ export class EditPlacementComponent implements OnInit{
       console.log('invalid');
       return;
     }else{
-      // this.skillClass.forEach(skill => {
-      //   if(skill.class === "greyBubbles bubbleSelected"){
-      //     const requiredSkills = this.formGroup.get('requiredSkills');
-      //   }
-      // })
+      this.skillClass.forEach(skill => {
+        if(skill.class === "greyBubbles bubbleSelected"){
+          const requiredSkills = this.formGroup.get('requiredSkills');
+        }
+      })
 
       const selectedSkills = this.getSelectedSkills();
       this.formGroup.get('requiredSkills')?.setValue(selectedSkills);
 
       const data = JSON.stringify({
-        placementId: this.placement.placementId,
+        placementId: null,
         positionName: this.formGroup.get('positionName')?.value,
         positionDescription: this.formGroup.get('positionDescription')?.value,
         positionsAvailable: this.formGroup.get('positionsAvailable')?.value,
@@ -79,7 +62,7 @@ export class EditPlacementComponent implements OnInit{
       console.log(data);
 
       //TODO EXPAND LOGIC AND SECURITY LATER
-      const response = await this.connection.postConnection(data, 'employer/edit-placement')
+      await this.connection.postConnection(data, 'employer/create-placement')
       await this.router.navigate(['employer/placements']);
     }
   }

@@ -1,9 +1,9 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {PlacementDTO, ProfileDTO} from '../../../../DTOs/ProfileDTO';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
-import {ConnectionService} from '../../../services/connection/connection.service';
-import {ProfileService} from '../../../services/profileServices/profile.service';
+import {ConnectionService} from '../../../../services/connection/connection.service';
+import {ProfileService} from '../../../../services/profileServices/profile.service';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -122,7 +122,6 @@ export class MatchStudentComponent implements OnInit {
       queryParams: { data: JSON.stringify(placement) }
     });
   }
-
   @ViewChild('noOption') noOption!: ElementRef;
   @ViewChild('yesOption') yesOption!: ElementRef;
   @ViewChild('profileCard') profileCard!: ElementRef;

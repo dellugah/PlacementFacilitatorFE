@@ -17,6 +17,47 @@ button{
   margin-left: .5em;
 }
 
+.no-style-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.no-style-link:visited,
+.no-style-link:hover,
+.no-style-link:active,
+.no-style-link:link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.placement{
+  display: grid;
+  height: 10em;
+  width: 20em;
+  margin: 1em;
+  border-radius: .5em;
+  border: 1px solid #cfcfcf;
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.05);
+  transition: all .1s ease-in-out;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.placement:hover{
+  box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fcffff;
+  border-color: #009dff;
+}
+
+.placement-name{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #cfcfcf;
+}
+
 .redButton{
   margin-top: 1em;
   font-size: 1em;
@@ -62,7 +103,7 @@ router-outlet{
 }
 
 .text-area{
-  height: 30vh;
+  height: 20vh;
   width: 15em;
   border-radius: 1em;
   border: 1px none;

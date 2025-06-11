@@ -1,0 +1,58 @@
+<div class="flex-row">
+  <div class="flex-column">
+    <h3>Profile Preview</h3>
+    <div class="studentProfileCard">
+      <!-- Profile Header with Photo -->
+      <div class="profileHeader">
+        <div class="header-info">
+          <div class="profilePhoto">
+            <img ngSrc="/student.png" alt="Profile Photo" width="80" height="80">
+          </div>
+          <div class="nameSection">
+            <h2>{{profile.profile.getValue().companyName}}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="division"></div>
+      <!-- Bio Section -->
+      <div class="bioSection">
+        <h3>Bio</h3>
+        <p>{{ profile.profile.getValue().bio }}</p>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="division"></div>
+      <div class="skillsSection">
+        <h3>Skills we look for</h3>
+        <div class="skillTags">
+          <span class="skill-tag" *ngFor="let skill of profile.profile.getValue().skills">{{ skill }}</span>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="division"></div>
+      <div class="contactSection">
+        <div class="links">
+          <a [href]="profile.profile.getValue().linkOne" target="_blank" class="link-tag no-style-link">
+            <i class="fas fa-link">LinkedIn</i>
+          </a>
+          <a [href]="profile.profile.getValue().linkTwo" target="_blank" class="link-tag no-style-link">
+            <i class="fas fa-link">Github</i>
+          </a>
+          <a [href]="profile.profile.getValue().file" target="_blank" class="link-tag no-style-link">
+            <i class="fas fa-link">Requirements</i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-column">
+    <h3>My Placements</h3>
+    <div class="placement" *ngFor="let placement of profile.getPlacements()">
+      <div class="placement-name">
+        <h2>{{ placement?.positionName }}</h2>
+      </div>
+    </div>
+  </div>
+</div>

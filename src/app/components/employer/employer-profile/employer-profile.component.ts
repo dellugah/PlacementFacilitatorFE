@@ -4,7 +4,7 @@ import {ProfileService} from '../../../services/profileServices/profile.service'
 import {BehaviorSubject} from 'rxjs';
 import {ProfileDTO} from '../../../DTOs/ProfileDTO';
 import {NgIf, NgOptimizedImage} from '@angular/common';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 
 
 @Component({
@@ -23,12 +23,14 @@ export class EmployerProfileComponent implements OnInit {
   profile$: BehaviorSubject<ProfileDTO> = new BehaviorSubject<ProfileDTO>(new ProfileDTO());
 
   constructor(protected connection : ConnectionService,
-              protected profile : ProfileService) { }
+              protected profile : ProfileService,
+              private router : Router,) { }
 
-    async ngOnInit(){
-    this.profile.profile = new BehaviorSubject<ProfileDTO>(await this.connection.getProfile() as ProfileDTO);
-    this.profile$ = this.profile.profile;
-    this.profileStyle()
+  async ngOnInit(){
+      this.profile.profile = new BehaviorSubject<ProfileDTO>(await this.connection.getProfile() as ProfileDTO);
+      this.profile$ = this.profile.profile;
+      this.profileStyle()
+      await this.router.navigate(['employer/profile']);
   }
 
   private profileStyle(){

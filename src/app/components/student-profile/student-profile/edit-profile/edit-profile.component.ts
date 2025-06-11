@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgClass, NgForOf} from '@angular/common';
-import {ProfileDTO, TechnicalSkill} from '../../../DTOs/ProfileDTO';
+import {ProfileDTO, TechnicalSkill} from '../../../../DTOs/ProfileDTO';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {ConnectionService} from '../../../services/connection/connection.service';
-import {ProfileService} from '../../../services/profileServices/profile.service';
+import {ConnectionService} from '../../../../services/connection/connection.service';
+import {ProfileService} from '../../../../services/profileServices/profile.service';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 

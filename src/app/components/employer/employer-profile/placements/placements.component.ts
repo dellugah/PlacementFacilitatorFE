@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgOptimizedImage} from '@angular/common';
-import {ProfileService} from '../../../services/profileServices/profile.service';
-import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
+import {ProfileService} from '../../../../services/profileServices/profile.service';
+import {PlacementDTO, ProfileDTO} from '../../../../DTOs/ProfileDTO';
 import {Router, RouterLink, ActivatedRoute } from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
-import {ConnectionService} from '../../../services/connection/connection.service';
+import {ConnectionService} from '../../../../services/connection/connection.service';
 
 @Component({
   selector: 'app-placements',

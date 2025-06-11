@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
+import {PlacementDTO, ProfileDTO} from '../../../../DTOs/ProfileDTO';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ConnectionService} from '../../../services/connection/connection.service';
-import {ProfileService} from '../../../services/profileServices/profile.service';
+import {ConnectionService} from '../../../../services/connection/connection.service';
+import {ProfileService} from '../../../../services/profileServices/profile.service';
 import {BehaviorSubject, combineLatest, filter, map, Subject, switchMap, takeUntil, tap} from 'rxjs';
 import {AsyncPipe, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
+import {navigateTo} from '../../../../utility/navigateTo';
 
 @Component({
   selector: 'app-placement-student-list',
@@ -184,17 +185,31 @@ export class PlacementStudentListComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Cleanup method that completes all subscriptions when the component is destroyed
-   * to prevent memory leaks.
-   */
 
+  /**
+   * Redirects to the Student Matching page, only available if potential students
+   * array is empty
+   * @protected
+   */
   protected async goToMatchingPage(){
     let placement = this.placementSubject.getValue();
     await this.router.navigate(['employer/matching'], {
       queryParams: { data: JSON.stringify(placement) }
     });
   }
+
+  /**
+   * Open email page on a new window
+   * @param eMail - student email
+  */
+  public mailTo(eMail: string | undefined){
+    navigateTo(eMail);
+  }
+
+  /**
+   * Cleanup method that completes all subscriptions when the component is destroyed
+   * to prevent memory leaks.
+   */
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();

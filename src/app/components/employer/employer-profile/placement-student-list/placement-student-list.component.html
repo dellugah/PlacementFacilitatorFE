@@ -37,20 +37,20 @@
       <div class="division"></div>
       <div class="contactSection">
         <div class="links">
-          <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+          <a [href]="student.linkOne" target="_blank" class="link-tag no-style-link">
             <i class="fas fa-link">LinkedIn</i>
           </a>
-          <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+          <a [href]="student.linkTwo" target="_blank" class="link-tag no-style-link">
             <i class="fas fa-link">Github</i>
           </a>
-          <a *ngIf="true" [href]="" target="_blank" class="link-tag">
+          <a [href]="student.file" target="_blank" class="link-tag no-style-link">
             <i class="fas fa-link">Resume</i>
           </a>
         </div>
       </div>
       <div class="division"></div>
       <div>
-        <button class="option-button">Contact</button>
+        <button class="option-button" (click)="mailTo(student.email)">Contact</button>
         <button class="option-button" (click)="offerPlacement(student.profileId)">Offer Placement</button>
         <button class="option-button delete"(click)="revokePlacement(student.profileId)">Remove</button>
       </div>

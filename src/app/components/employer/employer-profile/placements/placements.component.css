@@ -1,0 +1,32 @@
+.placement-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;  /* Changed from center to flex-start */
+  margin-top: 2em;
+  height: 70vh;
+  scroll-behavior: smooth;
+}
+
+.options{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.delete:hover{
+  background-color: #ff1a1a;
+  border-color: #ff0009;
+}
+
+.addImage{
+  opacity: 80%;
+}
+
+.addImage:hover{
+  opacity: 100%;
+}

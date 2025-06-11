@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ProfileService} from '../../../services/profileServices/profile.service';
+import {ProfileService} from '../../../../services/profileServices/profile.service';
 import {Router} from '@angular/router';
-import {PlacementDTO, ProfileDTO} from '../../../DTOs/ProfileDTO';
+import {PlacementDTO, ProfileDTO} from '../../../../DTOs/ProfileDTO';
 import {NgForOf, NgIf} from '@angular/common';
-import {ConnectionService} from '../../../services/connection/connection.service';
+import {ConnectionService} from '../../../../services/connection/connection.service';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
