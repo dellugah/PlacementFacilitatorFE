@@ -53,6 +53,10 @@
       <div class="placement-name">
         <h2>{{ placement?.positionName }}</h2>
       </div>
+      <div class="options">
+        <button class="option-button swipe" (click)="matchingSystem(placement)">Matching</button>
+        <button class="option-button stud-list" (click)="placementStudentList(placement)">Student List</button>
+      </div>
     </div>
   </div>
 </div>
