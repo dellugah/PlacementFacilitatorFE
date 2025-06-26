@@ -1,9 +1,5 @@
 .positionForm{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  align-items: center;  /* Changed from center to flex-start */
-  height: 70vh;
   scroll-behavior: smooth;
 }
